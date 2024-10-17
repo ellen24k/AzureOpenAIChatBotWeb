@@ -3,6 +3,7 @@ azure-core~=1.18.0
 azure-cognitiveservices-speech
 openai==1.45.1
 asyncio~=3.4.3
+portaudio
 PyAudio
 requests~=2.32.3
 openai~=1.45.1
