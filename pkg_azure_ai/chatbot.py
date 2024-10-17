@@ -1,9 +1,7 @@
 import os
 
-import dotenv
 from openai import AzureOpenAI
 
-dotenv.load_dotenv()
 
 deployment_name = os.environ['COMPLETIONS_MODEL_EASTUS']
 api_key = os.environ["AZURE_OPENAI_API_KEY_EASTUS"]

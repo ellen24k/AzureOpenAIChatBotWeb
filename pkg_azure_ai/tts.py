@@ -1,9 +1,7 @@
 import os
 
 import azure.cognitiveservices.speech as speechsdk
-from dotenv import load_dotenv
 
-load_dotenv()
 
 speech_key = os.getenv("SPEECH_KEY_S0")
 service_region = os.getenv("SERVICE_REGION_S0")

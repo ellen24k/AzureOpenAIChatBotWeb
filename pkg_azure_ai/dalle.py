@@ -3,10 +3,8 @@ import json
 import os
 import webbrowser
 
-import dotenv
 from openai import AzureOpenAI
 
-dotenv.load_dotenv()
 
 client = AzureOpenAI(
     api_version=os.environ["OPENAI_API_VERSION_EASTUS"],
