@@ -1,4 +1,4 @@
-import streamlit as st
+from streamlit import button, text_input, title, write
 # import asyncio
 # from pkg_azure_ai import chatbot
 # from pkg_azure_ai.dalle import generate_image
@@ -6,18 +6,18 @@ import streamlit as st
 # from pkg_utils.utils import make_history
 
 # Streamlit 애플리케이션 설정
-st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
+title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
 
 # 데이터베이스 초기화
 # db = DatabaseManager()
 
 # 사용자 입력 받기
-user_input = st.text_input('3행시를 만들 3글자를 입력하세요:')
+user_input = text_input('3행시를 만들 3글자를 입력하세요:')
 
-if st.button('시작'):
+if button('시작'):
     if user_input:
-        st.write(f"[사용자]\n{user_input}\n")
-        st.write('인공지능이 단어를 가지고 삼행시를 생성 중 입니다.')
+        write(f"[사용자]\n{user_input}\n")
+        write('인공지능이 단어를 가지고 삼행시를 생성 중 입니다.')
 
         # 챗봇 응답 생성
         # generated_text = chatbot.chat(user_input)
@@ -39,7 +39,7 @@ if st.button('시작'):
         # st.image(img_url if img_url else 'default_img', caption='Generated Image')
 
 # 히스토리 표시
-st.write('히스토리')
+write('히스토리')
 # all_data = db.select_all_data()
 # for row in all_data:
 #     st.write(row[1])
