@@ -13,7 +13,7 @@ st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
 
 # 사용자 입력 받기
 user_input = st.text_input('3행시를 만들 3글자를 입력하세요:')
-st.write("테스트")
+st.write("테스트3")
 
 if st.button('시작'):
     if user_input:
