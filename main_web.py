@@ -10,12 +10,7 @@ def main():
 
     print(st.session_state['logged_in'])
     if st.session_state['logged_in']:
-        if st.button("로그아웃"):
-            st.session_state['logged_in'] = False
-            st.success("로그아웃 되었습니다.")
-            st.rerun()
-        else:
-            app_page()
+        app_page()
     else:
         login_page()
 
