@@ -58,7 +58,8 @@ def app_page():
         # 이미지 표시
         img_path = f'history/{file_id}.png'
         if os.path.exists(img_path):
-            st.image(img_path, caption=title)
+            print(img_path)
+            # st.image(img_path, caption=title)
 
         # 버튼을 클릭하면 wav 파일 재생
         if st.button(f"Play {title}"):

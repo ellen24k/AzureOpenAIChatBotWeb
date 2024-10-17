@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def login_page():
     # 사용자 데이터베이스 (예시)
     USER_DATA = {
@@ -17,6 +16,7 @@ def login_page():
         if username in USER_DATA and USER_DATA[username] == password:
             st.session_state['logged_in'] = True
             st.success("로그인 성공!")
+            st.rerun()
         else:
             st.error("로그인 실패. 사용자 이름 또는 비밀번호를 확인하세요.")
 
@@ -30,6 +30,7 @@ def login_page():
         st.write("환영합니다!")
         if st.button("로그아웃"):
             logout()
+
     else:
         st.title("로그인")
         username = st.text_input("사용자 이름")
