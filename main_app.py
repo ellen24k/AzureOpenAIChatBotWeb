@@ -7,6 +7,26 @@ import streamlit as st
 from pkg_db.db import DatabaseManager
 # from pkg_utils.utils import make_history
 
+
+# 로그인 상태를 저장할 세션 상태 초기화
+if 'logged_in' not in st.session_state:
+    st.session_state['logged_in'] = False
+
+# URL 매개변수 확인
+query_params = st.experimental_get_query_params()
+page = query_params.get("page", ["login"])[0]
+
+# 페이지 전환
+if page == "main_app" and st.session_state['logged_in']:
+    st.write("환영합니다! 메인 앱 페이지입니다.")
+    if st.button("로그아웃"):
+        st.session_state['logged_in'] = False
+        st.experimental_set_query_params(page="login")
+        st.success("로그아웃 되었습니다.")
+else:
+    st.experimental_set_query_params(page="login")
+    st.error("로그인이 필요합니다.")
+
 # Streamlit 애플리케이션 설정
 st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
 
