@@ -43,3 +43,23 @@ st.write('히스토리')
 all_data = db.select_all_data()
 for row in all_data:
     st.write(row[1])
+
+for row in all_data:
+    file_id = row[0]
+    title = row[1]
+    st.write(f"Title: {title}")
+
+    # 이미지 표시
+    img_path = f'history/{file_id}.png'
+    if os.path.exists(img_path):
+        st.image(img_path, caption=title)
+
+    # 버튼을 클릭하면 wav 파일 재생
+    if st.button(f"Play {title}"):
+        wav_path = f'history/{file_id}.wav'
+        if os.path.exists(wav_path):
+            audio_file = open(wav_path, 'rb')
+            audio_bytes = audio_file.read()
+            st.audio(audio_bytes, format='audio/wav')
+        else:
+            st.write("WAV 파일을 찾을 수 없습니다.")
