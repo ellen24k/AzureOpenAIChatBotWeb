@@ -1,3 +1,5 @@
+import os
+
 import streamlit as st
 # import asyncio
 # from pkg_azure_ai import chatbot
