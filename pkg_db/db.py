@@ -2,7 +2,7 @@ import sqlite3
 import threading
 import glob
 import os
-from pkg_utils.utils import extract_title_from_txt
+from pkg_utils import extract_title_from_txt
 
 class DatabaseManager:
     def __init__(self, db_name='pkg_db/data.db'):
