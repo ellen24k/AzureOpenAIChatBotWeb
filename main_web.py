@@ -2,14 +2,14 @@ import streamlit as st
 # import asyncio
 # from pkg_azure_ai import chatbot
 # from pkg_azure_ai.dalle import generate_image
-# from pkg_db.db import DatabaseManager
+from pkg_db.db import DatabaseManager
 # from pkg_utils.utils import make_history
 
 # Streamlit 애플리케이션 설정
 st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
 
 # 데이터베이스 초기화
-# db = DatabaseManager()
+db = DatabaseManager()
 
 # 사용자 입력 받기
 user_input = st.text_input('3행시를 만들 3글자를 입력하세요:')
@@ -41,6 +41,6 @@ if st.button('시작'):
 
 # 히스토리 표시
 st.write('히스토리')
-# all_data = db.select_all_data()
-# for row in all_data:
-#     st.write(row[1])
+all_data = db.select_all_data()
+for row in all_data:
+    st.write(row[1])
