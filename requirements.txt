@@ -1,6 +1,10 @@
-requests~=2.32.3
 streamlit~=1.39.0
-openai~=1.45.1
-pyaudio~=0.2.11
 azure-core~=1.18.0
-
+azure-cognitiveservices-speech
+openai==0.27.0
+asyncio~=3.4.3
+PyAudio~=0.2.14
+requests~=2.32.3
+python-dotenv~=1.0.1
+openai~=1.45.1
+numpy~=2.0.2
