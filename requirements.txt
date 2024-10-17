@@ -3,3 +3,4 @@ azure-core~=1.18.0
 streamlit_authenticator~=0.1.5
 langchain
 langchain-community
+openai
