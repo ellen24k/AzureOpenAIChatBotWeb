@@ -3,10 +3,10 @@ import os
 from openai import AzureOpenAI
 
 
-deployment_name = os.environ['COMPLETIONS_MODEL_EASTUS']
-api_key = os.environ["AZURE_OPENAI_API_KEY_EASTUS"]
-azure_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_EASTUS']
-api_version = os.environ['OPENAI_API_VERSION_EASTUS']
+# deployment_name = os.environ['COMPLETIONS_MODEL_EASTUS']
+# api_key = os.environ["AZURE_OPENAI_API_KEY_EASTUS"]
+# azure_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_EASTUS']
+# api_version = os.environ['OPENAI_API_VERSION_EASTUS']
 
 client = AzureOpenAI(
     api_key=api_key,
