@@ -13,7 +13,7 @@ def main():
     print(st.session_state['logged_in'])
     if st.session_state['logged_in']:
         menu()
-        app_page()
+        # app_page()
     else:
         login_page()
 
