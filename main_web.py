@@ -21,6 +21,7 @@ def menu_hide():
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
+#stAppToolbar {visibility: hidden;}
 </style>
 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
