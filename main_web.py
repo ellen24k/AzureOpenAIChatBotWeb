@@ -4,6 +4,15 @@ import streamlit as st
 from app import app_page
 from login import login_page
 
+# 페이지 구성 설정
+st.set_page_config(
+    page_title="My App",
+    page_icon="🏠",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={"Get Help": None, "Report a bug": None, "About": None}
+)
+
 def main():
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = False
