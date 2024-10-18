@@ -5,6 +5,7 @@ import streamlit as st
 from pkg_db.db import insert_data
 from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
+from pkg_utils.mic import speech_recognize_once_from_mic
 from pkg_utils.stt import synthesize_and_play_speech
 from pkg_utils.utils import autoplay_audio
 
@@ -14,6 +15,9 @@ def load_view():
     content = None
 
     user_input = st.text_input('**3행시를 만들 3글자를 입력하세요:**')
+    if st.button('음성으로 입력하기'):
+        user_input = speech_recognize_once_from_mic()
+        st.write(f'음성인식 결과: {user_input}')
 
     if st.button('3행시 만들기'):
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.'):
