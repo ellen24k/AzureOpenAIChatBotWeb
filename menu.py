@@ -26,8 +26,8 @@ def menu():
     def navigation():
         if selected_option == "Home":
             home.load_view()
-        elif selected_option == "Search":
-            search.load_view()
+        elif selected_option == "Gallery":
+            gallery.load_view()
         elif selected_option == "About":
             about.load_view()
         elif selected_option == None:
