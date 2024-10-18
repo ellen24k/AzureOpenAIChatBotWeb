@@ -5,3 +5,4 @@ openai
 streamlit_navigation_bar
 streamlit_option_menu
 langchain_openai
+supabase

@@ -74,4 +74,3 @@ def delete_history(filename):
 #
 #     print(f"audioDeviceIndex1: {audioDeviceIndex1}, audioDeviceIndex2: {audioDeviceIndex2}")
 #     return audioDeviceIndex1, audioDeviceIndex2
-
