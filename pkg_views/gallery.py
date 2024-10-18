@@ -7,7 +7,6 @@ from pkg_utils.utils import extract_ske_value
 
 
 def load_view():
-
     data = fetch_data()
 
     if data.empty:
@@ -18,7 +17,7 @@ def load_view():
             st.write(f"{row['date']}" + ' [삭제]')
 
             if extract_ske_value(row['img_url']) <= datetime.today().strftime('%Y-%m-%d'):
-                img_url ="https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
+                img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
 
             st.image(row['img_url'], use_column_width=True, caption=f"{row['content']}")
             # st.image(row['img_url'], use_column_width=True)

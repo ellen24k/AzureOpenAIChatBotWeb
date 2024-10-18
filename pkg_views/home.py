@@ -1,3 +1,5 @@
+import time
+
 import streamlit as st
 
 from pkg_db.db import insert_data
@@ -15,22 +17,27 @@ def load_view():
 
     if st.button('3행시 만들기'):
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.'):
-            content = make_poem(user_input)
             autoplay_audio(
                 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/msg_wait.wav')
+            content = make_poem(user_input)
+            time.sleep(5) #
 
-            with st.spinner('Dall-e3 가 이미지를 생성 중 입니다. 잠시만 기다려주세요.'):
-                autoplay_audio(
-                    'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
-                img_url = generate_image(content)
+        with st.spinner('Dall-e3 가 이미지를 생성 중 입니다. 잠시만 기다려주세요.'):
+            autoplay_audio(
+                'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
+            img_url = generate_image(content) #
+
+
+        if not img_url:
+            img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
+            st.write('부적절한 단어 사용으로 기본 이미지를 사용합니다.')
 
         st.image(img_url, use_column_width=False, caption=f'{content}', width=400)
 
         with st.spinner('시를 낭송하는 중 입니다.'):
-            synthesize_and_play_speech(content, ssml=True)
+            synthesize_and_play_speech(content, ssml=True) #
+            autoplay_audio(
+                'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
 
-        print(content)
-        if not img_url:
-            img_url = "resources/default_img.png"
 
         insert_data(img_url, user_input, content)
