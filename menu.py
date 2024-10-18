@@ -1,36 +1,37 @@
-from turtle import st
+import streamlit as st
+from streamlit_option_menu import option_menu
+from views import home, about, search
 
 
-def authenticated_menu():
-    # Show a navigation menu for authenticated users
-    st.sidebar.page_link("app.py", label="Switch accounts")
-    st.sidebar.page_link("pages/user.py", label="Your profile")
-    if st.session_state.role in ["admin", "super-admin"]:
-        st.sidebar.page_link("pages/admin.py", label="Manage users")
-        st.sidebar.page_link(
-            "pages/super-admin.py",
-            label="Manage admin access",
-            disabled=st.session_state.role != "super-admin",
-        )
+options = ["Home", "Search", "About"]
 
 
-def unauthenticated_menu():
-    # Show a navigation menu for unauthenticated users
-    st.sidebar.page_link("app.py", label="Log in")
+menu_style = {
+    "container": {"width:": "100%", "display": "flex", "justify-content": "space-between", "padding": "0!important"},
+    "icon": {"color": "white", "font-size": "1.5em"},
+    "nav-link": {"color": "white", "font-size": "1em", "padding": "0 1em", "text-decoration": "none", "--hover-color": "grey"},
+    "nav-link-selected": {"color": "white", "font-size": "1em", "padding": "0 1em", "text-decoration": "none"},
+}
 
 
-def menu():
-    # Determine if a user is logged in or not, then show the correct
-    # navigation menu
-    if "role" not in st.session_state or st.session_state.role is None:
-        unauthenticated_menu()
-        return
-    authenticated_menu()
+selected_option = option_menu(
+    menu_title=None,
+    options=options,
+    icons=["globe2", "search", "chat"],
+    orientation="horizontal",
+    styles=menu_style,
+    default_index=0
+)
 
 
-def menu_with_redirect():
-    # Redirect users to the main page if not logged in, otherwise continue to
-    # render the navigation menu
-    if "role" not in st.session_state or st.session_state.role is None:
-        st.switch_page("app.py")
-    menu()
+def navigation():
+    if selected_option == "Home":
+        home.load_view()
+    elif selected_option == "Search":
+        search.load_view()
+    elif selected_option == "About":
+        about.load_view()
+    elif selected_option == None:
+        home.load_view()
+
+navigation()
