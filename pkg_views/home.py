@@ -2,8 +2,9 @@ import streamlit as st
 
 from langchain_openai import AzureChatOpenAI
 
+from pkg_utils.dalle import generate_image
 from pkg_utils.mic import recognize_speech
-from pkg_utils.stt import synthesize_speech, synthesize_and_play_speech
+from pkg_utils.stt import synthesize_and_play_speech
 
 
 def make_poem(user_input):
@@ -30,7 +31,6 @@ def load_view():
             st.write(user_input + ' 단어가 인식되었습니다.')
             with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다.'):
                 synthesize_and_play_speech(make_poem(user_input), ssml=True)
-
-
+                st.image(generate_image(user_input), use_column_width=True, caption='Dall-E3 이미지 생성 결과')
 
 
