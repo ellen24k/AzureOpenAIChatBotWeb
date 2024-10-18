@@ -1,11 +1,9 @@
 import streamlit as st
 
 from langchain_openai import AzureChatOpenAI
-from sympy import content
 
 from pkg_db.db import insert_data
 from pkg_utils.dalle import generate_image
-from pkg_utils.mic import recognize_speech
 from pkg_utils.stt import synthesize_and_play_speech
 
 
