@@ -13,7 +13,7 @@ def app_page():
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다.'):
             if user_input:
                 st.write(f"[사용자]\n{user_input}\n")
-                result = chat_model.predict(user_input + '의 3글자로 3행시 만들어. 형식은 "글자: 내용," 만 작성해')
+                result = chat_model.predict(text=user_input + '의 3글자로 3행시 만들어. 형식은 "글자: 내용," 만 작성해')
 
                 # prompt = PromptTemplate(template="Create a poem with the following three characters: {input}", input_variables=["input"])
                 # query = prompt.format(input=user_input)
