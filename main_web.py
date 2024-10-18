@@ -1,7 +1,5 @@
-import os
 import streamlit as st
 
-from app import app_page
 from login import login_page
 from menu import menu
 
@@ -18,5 +16,15 @@ def main():
         login_page()
 
 
+def menu_hide():
+    hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+"""
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 if __name__ == '__main__':
+    menu_hide()
     main()
