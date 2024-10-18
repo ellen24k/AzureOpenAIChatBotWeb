@@ -17,9 +17,7 @@ def main():
         app_page()
         st.write(page)
     else:
-        page = st_navbar(["About"])
         login_page()
-        st.write(page)
 
 if __name__ == '__main__':
     main()
