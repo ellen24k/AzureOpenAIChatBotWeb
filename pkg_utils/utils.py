@@ -1,6 +1,7 @@
 import os
 import shutil
 from datetime import datetime
+import streamlit as st
 
 import requests
 
@@ -81,3 +82,11 @@ def extract_ske_value(url):
     query_params = parse_qs(parsed_url.query)
     sv_value = query_params.get('ske', [None])[0]
     return sv_value
+
+def autoplay_audio(file_path):
+    audio_html = f"""
+    <audio autoplay style="display:none;">
+      <source src="{file_path}" type="audio/wav">
+    </audio>
+    """
+    st.markdown(audio_html, unsafe_allow_html=True)
