@@ -1,6 +1,6 @@
-import os
 import streamlit as st
-from langchain_community.chat_models import AzureChatOpenAI
+# from langchain_community.chat_models import AzureChatOpenAI
+from langchain.chat_models import AzureChatOpenAI
 
 def app_page():
     chat_model = AzureChatOpenAI()
