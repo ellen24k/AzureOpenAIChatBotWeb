@@ -81,3 +81,4 @@ fabric.properties
 .env
 temp/output.wav
 backup_examples/kli.wav
+/.streamlit/secrets.toml
