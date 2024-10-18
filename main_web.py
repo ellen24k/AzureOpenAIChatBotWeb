@@ -44,9 +44,8 @@ def main():
 
     print(st.session_state['logged_in'])
     if st.session_state['logged_in']:
-        page = st_navbar(["Home", "Documentation", "Examples", "Community", "About"])
+        menu()
         app_page()
-        st.write(page)
     else:
         login_page()
 
