@@ -10,7 +10,7 @@ supabase: Client = create_client(supabase_url, supabase_key)
 
 def fetch_data():
     try:
-        response = supabase.table('data').select('*').execute()
+        response = supabase.table('data').select('*').order('date', desc=True).execute()
         data = response.data
         return pd.DataFrame(data)
     except APIError as e:
@@ -28,4 +28,3 @@ def insert_data(img_url, title, content):
         return response
     except APIError as e:
         return None
-
