@@ -1,3 +1,7 @@
 [client]
 showSidebarNavigation = "false"
 toolbarMode = "minimal"
+
+[server]
+showSidebarNavigation = "false"
+toolbarMode = "minimal"

@@ -3,7 +3,7 @@ from views import home, about, search
 
 
 def menu():
-    options = ["삼행시", "갤러리", "About"]
+    options = ["Home", "Gallery", "About"]
 
     menu_style = {
         "container": {"width:": "100%", "display": "flex", "justify-content": "space-between",
