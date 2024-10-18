@@ -1,6 +1,6 @@
 import streamlit as st
 
-from login import login_page
+from pkg_views.login import login_page
 from menu import menu
 
 
