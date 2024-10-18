@@ -34,9 +34,7 @@ def load_view():
 
         st.image(img_url, use_column_width=False, caption=f'{content}', width=400)
 
-        with st.spinner('시를 낭송하는 중 입니다.'):
-            synthesize_and_play_speech(content, ssml=True) #
-            autoplay_audio(
-                'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
+        # with st.spinner('시를 낭송하는 중 입니다.'):
+        synthesize_and_play_speech(content, ssml=True)
 
         insert_data(img_url, user_input, content)
