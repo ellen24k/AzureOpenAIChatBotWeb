@@ -22,7 +22,7 @@ def menu_hide():
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
-.stAppToolbarActionButton {visibility: hidden;}
+.stToolbarActionButton {visibility: hidden;}
 </style>
 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
