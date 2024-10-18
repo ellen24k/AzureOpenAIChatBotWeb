@@ -6,7 +6,6 @@ from app import app_page
 from login import login_page
 
 
-
 def main():
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = False
@@ -16,6 +15,7 @@ def main():
         app_page()
     else:
         login_page()
+
 
 if __name__ == '__main__':
     # menu()
