@@ -32,8 +32,9 @@ def load_view():
             img_url = generate_image(content)
             st.image(img_url, use_column_width=True, caption='Dall-E3 이미지 생성 결과')
         with st.spinner('시를 낭송하는 중 입니다.'):
-            synthesize_and_play_speech(user_input, ssml=True)
+            synthesize_and_play_speech(content, ssml=True)
 
+        print(content)
         if not img_url:
             img_url ="resources/default_img.png"
 
