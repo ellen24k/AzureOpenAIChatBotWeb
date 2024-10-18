@@ -1,7 +1,9 @@
+from datetime import datetime
+
 import streamlit as st
 
 from pkg_db.db import fetch_data
-from pkg_utils.utils import extract_sv_value
+from pkg_utils.utils import extract_ske_value
 
 
 def load_view():
@@ -13,11 +15,17 @@ def load_view():
     else:
         for index, row in data.iterrows():
             st.subheader(row['title'])
-            try:
-                st.image(row['img_url'], use_column_width=True)
-            except Exception as e:
-                st.image("default_img.png", use_column_width=True)
-            st.write("보관기간 :" + extract_sv_value(row['img_url']))
+
+            # if extract_sv_value(row['img_url']) >= datetime.today().strftime('%Y-%m-%d'):
+            #     img_url ="resources/default_img.png"
+            #     st.image(img_url, use_column_width=True)
+            # else:
+            #    st.image(row['img_url'], use_column_width=True)
+            # st.write(extract_sv_value(row['img_url']) + "~" + datetime.today().strftime('%Y-%m-%d')))
+
+            # st.image(row['img_url'], use_column_width=True, caption=row['img_url'])
+            st.image(row['img_url'], use_column_width=True)
             st.write(f"**Date:** {row['date']}")
-            st.write(f"**Content:** {row['content']}")
+            # st.write(f"**Expired** : {extract_ske_value(row['img_url'])}")
+            st.write(f"**Content:**\n\n{row['content']}")
             st.markdown("---")

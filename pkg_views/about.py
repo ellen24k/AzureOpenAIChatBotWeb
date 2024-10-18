@@ -1,4 +1,5 @@
 import streamlit as st
 
 def load_view():
+    st.title('3행시 갤러리 using TTS, Dall-e3, Chat-GPT4o with LangChain, Streamlit, Supabase, Azure Cloud.')
     st.image("resources/diagram.png", use_column_width=True)

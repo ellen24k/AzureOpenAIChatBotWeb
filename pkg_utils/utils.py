@@ -76,8 +76,8 @@ def delete_history(filename):
 #     return audioDeviceIndex1, audioDeviceIndex2
 from urllib.parse import urlparse, parse_qs
 
-def extract_sv_value(url):
+def extract_ske_value(url):
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
-    sv_value = query_params.get('sv', [None])[0]
+    sv_value = query_params.get('ske', [None])[0]
     return sv_value
