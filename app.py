@@ -16,5 +16,5 @@ def app_page():
                 st.write(f"{user_input}\n\n")
                 result = chat_model.predict(text=user_input + '의 3글자로 3행시 만들어. 형식은 "글자: 내용," 만 작성해')
 
-                st.write(f"[챗봇])\n")
+                st.write(f"[챗봇]\n")
                 st.write(f"{result}\n\n")
