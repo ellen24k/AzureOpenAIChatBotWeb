@@ -1,7 +1,7 @@
 import streamlit as st
 
-from langchain.chat_models import AzureChatOpenAI
-
+# from langchain.chat_models import AzureChatOpenAI
+from langchain_community.chat_models import AzureChatOpenAI
 
 def load_view():
     chat_model = AzureChatOpenAI()
