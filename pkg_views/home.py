@@ -34,8 +34,7 @@ def load_view():
         with st.spinner('시를 낭송하는 중 입니다.'):
             synthesize_and_play_speech(content, ssml=True)
 
-        st.write(extract_ske_value(img_url) + " " + datetime.today().strftime('%Y-%m-%d'))
-        if not img_url or extract_ske_value(img_url) <= datetime.today().strftime('%Y-%m-%d'):
+        if not img_url:
             img_url ="resources/default_img.png"
 
         insert_data(img_url, user_input, content)
