@@ -7,7 +7,7 @@ speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_r
 
 def synthesize_and_play_speech(text, ssml=False, voice_name="ko-KR-JiMinNeural"):
     speech_config.speech_synthesis_voice_name = voice_name
-    audio_config = speechsdk.audio.AudioOutputConfig(filename="output.wav")  # 파일로 저장
+    audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
     synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
     if ssml:
@@ -33,20 +33,3 @@ def synthesize_and_play_speech(text, ssml=False, voice_name="ko-KR-JiMinNeural")
         print(f"Speech synthesis canceled: \n{cancellation_details.reason}")
         if cancellation_details.reason == speechsdk.CancellationReason.Error:
             print(f"Error details: \n{cancellation_details.error_details}")
-
-    return "output.wav"
-
-# Streamlit에서 파일 다운로드
-st.title("Azure Speech Service with Streamlit")
-
-if st.button('Generate and Download Speech'):
-    text = st.text_input("Enter text to synthesize")
-    if text:
-        file_path = synthesize_and_play_speech(text)
-        with open(file_path, "rb") as file:
-            btn = st.download_button(
-                label="Download synthesized speech",
-                data=file,
-                file_name="synthesized_speech.wav",
-                mime="audio/wav"
-            )
