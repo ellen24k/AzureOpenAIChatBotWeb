@@ -1,14 +1,13 @@
-import os
-
+import streamlit as st
 import azure.cognitiveservices.speech as speechsdk
 
-speech_key = os.getenv("SPEECH_KEY_S0")
-service_region = os.getenv("SERVICE_REGION_S0")
+speech_key = st.secrets["SPEECH_KEY_S0"]
+service_region = st.secrets["SERVICE_REGION_S0"]
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
-def synthesize_speech(text, filename="temp/output.wav", ssml=False, voice_name="ko-KR-JiMinNeural"):
+def synthesize_and_play_speech(text, ssml=False, voice_name="ko-KR-JiMinNeural"):
     speech_config.speech_synthesis_voice_name = voice_name
-    audio_config = speechsdk.audio.AudioOutputConfig(filename=filename)
+    audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
     synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
     if ssml:
