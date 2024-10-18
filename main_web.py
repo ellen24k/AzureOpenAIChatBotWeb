@@ -8,10 +8,8 @@ def main():
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = False
 
-    print(st.session_state['logged_in'])
     if st.session_state['logged_in']:
         menu()
-        # app_page()
     else:
         login_page()
 
@@ -28,5 +26,5 @@ footer {visibility: hidden;}
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    menu_hide()
+    # menu_hide()
     main()

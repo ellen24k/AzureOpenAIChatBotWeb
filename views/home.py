@@ -1,13 +1,11 @@
 import streamlit as st
 
-# from langchain.chat_models import AzureChatOpenAI
-# from langchain_community.chat_models import AzureChatOpenAI
 from langchain_openai import AzureChatOpenAI
 
 def load_view():
     chat_model = AzureChatOpenAI()
 
-    st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
+    st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube, Streamlit, Supabase, Azure')
     user_input = st.text_input('3행시를 만들 3글자를 입력하세요:')
 
     if st.button('시작'):
