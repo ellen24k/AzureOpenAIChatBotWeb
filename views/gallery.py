@@ -1,3 +1,4 @@
+import streamlit as st
 
 def load_view():
-    print('Gallery')
+    st.write('Gallery')
