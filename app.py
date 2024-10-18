@@ -18,6 +18,3 @@ def app_page():
 
                 st.write(f"[챗봇])\n")
                 st.write(f"{result}\n\n")
-
-if __name__ == '__main__':
-    app_page()
