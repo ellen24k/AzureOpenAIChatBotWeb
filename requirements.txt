@@ -4,3 +4,4 @@ streamlit_authenticator~=0.1.5
 langchain
 langchain-community
 openai
+streamlit_navigation_bar
