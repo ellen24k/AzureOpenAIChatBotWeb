@@ -39,5 +39,4 @@ def load_view():
             autoplay_audio(
                 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
 
-
         insert_data(img_url, user_input, content)
