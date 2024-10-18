@@ -3,7 +3,7 @@ from views import home, about, gallery
 
 
 def menu():
-    options = ["Home", "Gallery", "About"]
+    options = ["ChatBot", "Gallery", "About"]
 
     menu_style = {
         "container": {"width:": "100%", "display": "flex", "justify-content": "space-between",
@@ -17,14 +17,14 @@ def menu():
     selected_option = option_menu(
         menu_title=None,
         options=options,
-        icons=["globe2", "search", "chat"],
+        icons=["robot", "image", "book"],
         orientation="horizontal",
         styles=menu_style,
         default_index=0
     )
 
     def navigation():
-        if selected_option == "Home":
+        if selected_option == "ChatBot":
             home.load_view()
         elif selected_option == "Gallery":
             gallery.load_view()
