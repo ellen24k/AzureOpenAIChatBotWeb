@@ -15,6 +15,6 @@ def load_view():
             if user_input:
                 st.write(f"[사용자]\n")
                 st.write(f"{user_input}\n\n")
-                result = chat_model.invoke(input=user_input + '의 3글자로 3행시 만들어. 형식은 "글자: 내용,\n" 만 작성해')
+                result = chat_model.invoke(input=user_input + '의 3글자로 3행시 만들어. 형식은 세줄로 "글자: 내용" 만 작성해')
                 st.write(f"[챗봇]\n")
                 st.write(f"{result.content}\n\n")
