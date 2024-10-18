@@ -1,8 +1,7 @@
 streamlit~=1.39.0
 azure-core~=1.18.0
 streamlit_authenticator~=0.1.5
-langchain
-langchain-community
 openai
 streamlit_navigation_bar
 streamlit_option_menu
+langchain_openai
