@@ -1,5 +1,5 @@
 from streamlit_option_menu import option_menu
-from views import home, about, search
+from views import home, about, gallery
 
 
 def menu():

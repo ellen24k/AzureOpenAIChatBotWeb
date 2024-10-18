@@ -2,12 +2,12 @@ import streamlit as st
 
 from langchain.chat_models import AzureChatOpenAI
 
+
 def load_view():
     chat_model = AzureChatOpenAI()
 
     st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
     user_input = st.text_input('3행시를 만들 3글자를 입력하세요:')
-
 
     if st.button('시작'):
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다.'):
