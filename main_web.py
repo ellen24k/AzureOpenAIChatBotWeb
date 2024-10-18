@@ -14,12 +14,12 @@ def main():
     print(st.session_state['logged_in'])
     if st.session_state['logged_in']:
         page = st_navbar(["Home", "Documentation", "Examples", "Community", "About"])
-        st.write(page)
         app_page()
+        st.write(page)
     else:
         page = st_navbar(["About"])
-        st.write(page)
         login_page()
+        st.write(page)
 
 if __name__ == '__main__':
     main()
