@@ -2,7 +2,7 @@ import streamlit as st
 
 from langchain.chat_models import AzureChatOpenAI
 
-def app_page():
+def load_view():
     chat_model = AzureChatOpenAI()
 
     st.title('3행시 갤러리 using TTS, STT, Dall-E3, Chat-GPT4o with VTube')
