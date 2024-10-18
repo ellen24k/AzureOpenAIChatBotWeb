@@ -6,5 +6,4 @@ streamlit_navigation_bar
 streamlit_option_menu
 langchain_openai
 supabase
-libasound2-dev
 azure-cognitiveservices-speech~=1.41.1
