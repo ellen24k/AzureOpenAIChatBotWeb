@@ -74,3 +74,10 @@ def delete_history(filename):
 #
 #     print(f"audioDeviceIndex1: {audioDeviceIndex1}, audioDeviceIndex2: {audioDeviceIndex2}")
 #     return audioDeviceIndex1, audioDeviceIndex2
+from urllib.parse import urlparse, parse_qs
+
+def extract_sv_value(url):
+    parsed_url = urlparse(url)
+    query_params = parse_qs(parsed_url.query)
+    sv_value = query_params.get('sv', [None])[0]
+    return sv_value

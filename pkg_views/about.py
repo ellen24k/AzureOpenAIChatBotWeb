@@ -1,4 +1,4 @@
 import streamlit as st
 
 def load_view():
-    st.write('About')
+    st.image("resources/diagram.png", use_column_width=True)

@@ -1,17 +1,12 @@
-from supabase import create_client, Client
-import pandas as pd
 import streamlit as st
-from postgrest import APIError
 
 from pkg_db.db import fetch_data
+from pkg_utils.utils import extract_sv_value
 
 
 def load_view():
 
-    st.title('Supabase Data Gallery')
-
     data = fetch_data()
-    st.write(data)
 
     if data.empty:
         st.write("No data available or table does not exist.")
@@ -22,7 +17,7 @@ def load_view():
                 st.image(row['img_url'], use_column_width=True)
             except Exception as e:
                 st.image("default_img.png", use_column_width=True)
+            st.write("보관기간 :" + extract_sv_value(row['img_url']))
             st.write(f"**Date:** {row['date']}")
             st.write(f"**Content:** {row['content']}")
             st.markdown("---")
-
