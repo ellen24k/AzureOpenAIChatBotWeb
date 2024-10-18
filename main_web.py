@@ -5,12 +5,16 @@ from app import app_page
 from login import login_page
 
 # 페이지 구성 설정
-st.set_page_config(
-    page_title="My App",
-    page_icon="🏠",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={"Get Help": None, "Report a bug": None, "About": None}
+st.set_page_config(page_title="My App", layout="wide")
+
+# CSS를 사용하여 Share, Fork, Edit 버튼 숨기기
+st.markdown(
+    """
+    <style>
+    .stApp .header {display: none;}
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
 def main():
