@@ -4,12 +4,8 @@ import streamlit as st
 from app import app_page
 from login import login_page
 
-# 페이지 구성 설정
-# st.set_page_config(
-#     page_title="My App",
-#     page_icon="🏠",
-#     layout="wide"
-# )
+from streamlit_navigation_bar import st_navbar
+
 
 def main():
     if 'logged_in' not in st.session_state:
@@ -17,8 +13,12 @@ def main():
 
     print(st.session_state['logged_in'])
     if st.session_state['logged_in']:
+        page = st_navbar(["Home", "Documentation", "Examples", "Community", "About"])
+        st.write(page)
         app_page()
     else:
+        page = st_navbar(["About"])
+        st.write(page)
         login_page()
 
 if __name__ == '__main__':
