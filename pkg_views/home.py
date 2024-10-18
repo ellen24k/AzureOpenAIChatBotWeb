@@ -2,6 +2,9 @@ import streamlit as st
 
 from langchain_openai import AzureChatOpenAI
 
+from pkg_utils.mic import capture_audio
+
+
 def load_view():
     chat_model = AzureChatOpenAI()
 
@@ -16,3 +19,6 @@ def load_view():
                 result = chat_model.invoke(input=user_input + '의 3글자로 3행시 만들어. 형식은 세줄로 "글자: 내용" 만 작성해')
                 st.write(f"[챗봇]\n")
                 st.write(f"{result.content}\n\n")
+
+    if st.button('마이크로 입력'):
+        user_input = capture_audio()
