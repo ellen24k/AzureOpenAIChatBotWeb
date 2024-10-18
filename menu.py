@@ -30,7 +30,7 @@ def menu():
             gallery.load_view()
         elif selected_option == "About":
             about.load_view()
-        elif selected_option == None:
+        elif selected_option is None:
             home.load_view()
 
     navigation()
