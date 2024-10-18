@@ -5,3 +5,4 @@ langchain
 langchain-community
 openai
 streamlit_navigation_bar
+streamlit_option_menu
