@@ -1,19 +1,18 @@
-import streamlit as st
 from streamlit_option_menu import option_menu
 from views import home, about, search
 
 
 def menu():
-    options = ["Home", "Search", "About"]
-
+    options = ["삼행시", "갤러리", "About"]
 
     menu_style = {
-        "container": {"width:": "100%", "display": "flex", "justify-content": "space-between", "padding": "0!important"},
+        "container": {"width:": "100%", "display": "flex", "justify-content": "space-between",
+                      "padding": "0!important"},
         "icon": {"color": "white", "font-size": "1.5em"},
-        "nav-link": {"color": "white", "font-size": "1em", "padding": "0 1em", "text-decoration": "none", "--hover-color": "grey"},
+        "nav-link": {"color": "white", "font-size": "1em", "padding": "0 1em", "text-decoration": "none",
+                     "--hover-color": "grey"},
         "nav-link-selected": {"color": "white", "font-size": "1em", "padding": "0 1em", "text-decoration": "none"},
     }
-
 
     selected_option = option_menu(
         menu_title=None,
@@ -23,7 +22,6 @@ def menu():
         styles=menu_style,
         default_index=0
     )
-
 
     def navigation():
         if selected_option == "Home":

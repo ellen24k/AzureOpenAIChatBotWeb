@@ -4,7 +4,7 @@ from streamlit_navigation_bar import st_navbar
 
 from app import app_page
 from login import login_page
-from menu import menu
+
 
 
 def main():
@@ -18,5 +18,5 @@ def main():
         login_page()
 
 if __name__ == '__main__':
-    menu()
-    # main()
+    # menu()
+    main()
