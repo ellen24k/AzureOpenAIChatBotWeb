@@ -12,14 +12,12 @@ def app_page():
     if st.button('시작'):
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다.'):
             if user_input:
-                st.write(f"[사용자]\n{user_input}\n")
+                st.write(f"[사용자]\n")
+                st.write(f"{user_input}\n\n")
                 result = chat_model.predict(text=user_input + '의 3글자로 3행시 만들어. 형식은 "글자: 내용," 만 작성해')
 
-                # prompt = PromptTemplate(template="Create a poem with the following three characters: {input}", input_variables=["input"])
-                # query = prompt.format(input=user_input)
-                # response = llm(query)
-
-                st.write(f"[챗봇]\n{result}\n\n")
+                st.write(f"[챗봇])\n")
+                st.write(f"{result}\n\n")
 
 if __name__ == '__main__':
     app_page()
