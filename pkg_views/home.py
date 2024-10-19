@@ -7,12 +7,16 @@ from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
 from pkg_utils.mic import speech_recognize_once_from_mic
 from pkg_utils.stt import synthesize_and_play_speech
+from pkg_utils.tts import tts
 from pkg_utils.utils import autoplay_audio
 
 
 def load_view():
     img_url = None
     content = None
+    tts("3행시를 만들 3글자를 입력하세요.")
+
+    return
 
     user_input = st.text_input('**3행시를 만들 3글자를 입력하세요:**')
 
@@ -24,9 +28,10 @@ def load_view():
             time.sleep(5) #
 
         with st.spinner('Dall-e3 가 이미지를 생성 중 입니다. 잠시만 기다려주세요.'):
+
             autoplay_audio(
                 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
-            img_url = generate_image(content) #
+            # img_url = generate_image(content) #
 
 
         if not img_url:
@@ -36,6 +41,6 @@ def load_view():
         st.image(img_url, use_column_width=False, caption=f'{content}', width=400)
 
         # with st.spinner('시를 낭송하는 중 입니다.'):
-        synthesize_and_play_speech(content, ssml=True)
+        # synthesize_and_play_speech(content, ssml=True)
 
         insert_data(img_url, user_input, content)
