@@ -23,7 +23,6 @@ def load_view():
             time.sleep(5)  #
 
         with st.spinner('Dall-e3 가 이미지를 생성 중 입니다. 잠시만 기다려주세요.'):
-
             autoplay_audio(
                 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
             img_url = generate_image(content)  #
