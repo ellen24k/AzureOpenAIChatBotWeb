@@ -7,16 +7,12 @@ from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
 from pkg_utils.mic import speech_recognize_once_from_mic
 from pkg_utils.stt import synthesize_and_play_speech
-from pkg_utils.tts import tts
 from pkg_utils.utils import autoplay_audio
 
 
 def load_view():
     img_url = None
     content = None
-    tts("3행시를 만들 3글자를 입력하세요.")
-
-    return
 
     user_input = st.text_input('**3행시를 만들 3글자를 입력하세요:**')
 
