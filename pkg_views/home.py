@@ -5,7 +5,7 @@ import streamlit as st
 from pkg_db.db import insert_data
 from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
-from pkg_utils.stt import synthesize_and_play_speech
+from pkg_utils.stt import synthesize_speech
 from pkg_utils.utils import autoplay_audio
 
 
@@ -34,6 +34,7 @@ def load_view():
         st.image(img_url, use_column_width=False, caption=f'{content}', width=400)
 
         with st.spinner('시를 낭송하는 중 입니다.'):
-            synthesize_and_play_speech(content, ssml=True)
+            synthesize_speech(content, ssml=True)
+            autoplay_audio('temp/gen_text.wav')
 
         insert_data(img_url, user_input, content)
