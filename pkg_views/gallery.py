@@ -1,9 +1,6 @@
-from datetime import datetime
-
 import streamlit as st
 
 from pkg_db.db import fetch_data
-from pkg_utils.utils import extract_ske_value
 
 
 def load_view():
