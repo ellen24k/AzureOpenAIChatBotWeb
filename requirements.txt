@@ -6,5 +6,7 @@ streamlit_navigation_bar
 streamlit_option_menu
 langchain_openai
 supabase
-googletrans
-gtts
+datasets
+soundfile
+torch
+transformers
