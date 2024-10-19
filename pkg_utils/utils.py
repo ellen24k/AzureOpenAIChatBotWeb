@@ -2,8 +2,8 @@ import os
 import shutil
 from datetime import datetime
 import streamlit as st
-
 import requests
+import json
 
 def copy_file(source_file, destination_file):
     shutil.copy(source_file, destination_file)
@@ -25,22 +25,7 @@ def save_text_to_file(text, file_path):
     print(f"텍스트가 {file_path}에 저장되었습니다.")
 
 def get_current_time_no_spaces():
-    return datetime.now().strftime('%Y%m%d%H%M%S')
-
-def make_history(generate_text, img_url, wav_file):
-
-    try :
-        now = get_current_time_no_spaces()
-        if (img_url == 'default_img'):
-            copy_file(f'resources/default_img.png', f'history/' + now + '.png')
-        else:
-            download_file(img_url, f'history/' + now + '.png')
-        copy_file(wav_file, f'history/' + now + '.wav')
-        save_text_to_file(generate_text, f'history/' + now + '.txt')
-        return now
-    except Exception as e:
-        print(f"Error making history: {e}")
-        return
+    return datetime.now().strftime('%Y%m%d%H%M%S%f')
 
 def extract_title_from_txt(filename):
     with open(f'history/{filename}.txt', 'r', encoding='utf-8') as file:
@@ -90,3 +75,4 @@ def autoplay_audio(file_path):
     </audio>
     """
     st.markdown(audio_html, unsafe_allow_html=True)
+

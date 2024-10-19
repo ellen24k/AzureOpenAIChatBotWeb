@@ -11,9 +11,9 @@ def load_view():
     else:
         for index, row in data.iterrows():
             st.subheader(f"**{row['title']}**")
-            st.write(f"{row['date']}" + ' [삭제]')
-
             st.image(row['img_url'], use_column_width=True, caption=f"{row['content']}")
+            # st.write(f"{row['date']}")
+            st.audio(row['wav_url'], format='audio/wav')
             # st.image(row['img_url'], use_column_width=True)
             # st.write(f"**Expired** : {extract_ske_value(row['img_url'])}")
             # st.write(f"**Content:**\n\n{row['content']}")
