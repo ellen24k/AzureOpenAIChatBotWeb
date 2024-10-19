@@ -35,4 +35,4 @@ audio_value = st.experimental_audio_input("Record a voice message")
 
 if audio_value:
     st.audio(audio_value)
-    st.write(audio_value._file_urls)
+    st.write(audio_value)
