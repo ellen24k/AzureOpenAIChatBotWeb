@@ -76,3 +76,15 @@ def autoplay_audio(file_path):
     """
     st.markdown(audio_html, unsafe_allow_html=True)
 
+def padding_set():
+    css = """
+    <style>
+    .stMainBlockContainer.block-container.st-emotion-cache-13ln4jf.ea3mdgi5 {
+        padding-top: 48px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+    }
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)

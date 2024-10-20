@@ -1,9 +1,12 @@
 import streamlit as st
 
 from pkg_db.db import fetch_data
+from pkg_utils.utils import padding_set
 
 
 def load_view():
+    padding_set()
+
     data = fetch_data()
 
     if data.empty:

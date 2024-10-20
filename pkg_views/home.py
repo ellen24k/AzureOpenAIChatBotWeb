@@ -6,17 +6,18 @@ from pkg_db.db import insert_data, upload_file
 from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
 from pkg_utils.stt import synthesize_speech
-from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file
+from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set
 import os
 
-def load_view():
 
+def load_view():
+    padding_set()
     img_url = None
     content = None
 
-    user_input = st.text_input('**삼행시를 만들 3글자를 입력하세요:**')
+    user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**')
 
-    if st.button('3행시 만들기'):
+    if st.button('삼행시 만들기'):
         file_name = get_current_time_no_spaces()
 
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.'):
@@ -54,9 +55,8 @@ def load_view():
 
         st.success('모든 작업이 완료 되었습니다.')
 
-
-    #todo 화면 좀 위로 올릴 수 있나 보기
-    #todo 마이크입력 STT 처리하기
-    #todo 뻐끔뻐끔
-    #todo requirement  생성처리 버전까지
-    #todo 입장 번호 입력
+    # todo 화면 좀 위로 올릴 수 있나 보기
+    # todo 마이크입력 STT 처리하기
+    # todo 뻐끔뻐끔
+    # todo requirement  생성처리 버전까지
+    # todo 입장 번호 입력
