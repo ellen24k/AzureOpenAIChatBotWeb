@@ -10,8 +10,8 @@ def menu():
     menu_style = {
         "container": {"width:": "100%", "display": "flex", "justify-content": "space-between",
                       "padding": "0!important"},
-        "icon": {"color": "white", "font-size": "1.5em"},
-        "nav-link": {"color": "white", "font-size": "1em", "padding": "0 1em", "text-decoration": "none",
+        "icon": {"color": "white", "font-size": "1.2em"},
+        "nav-link": {"color": "white", "font-size": "0.8em", "padding": "0 1em", "text-decoration": "none",
                      "--hover-color": "grey"},
         "nav-link-selected": {"color": "white", "font-size": "1em", "padding": "0 1em", "text-decoration": "none"},
     }
