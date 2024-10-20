@@ -1,10 +1,15 @@
-streamlit~=1.39.0
-azure-core~=1.18.0
-streamlit_authenticator~=0.1.5
-openai
-streamlit_navigation_bar
-streamlit_option_menu
-langchain_openai
-supabase
-pyshorteners
-azure-cognitiveservices-speech
+#langchain==0.3.4
+langchain_openai==0.2.2
+openai==1.45.1
+#pandas==2.2.3
+#postgrest==0.17.2
+pyshorteners==1.0.1
+Requests==2.32.3
+streamlit==1.39.0
+supabase==2.9.1
+azure-core==1.18.0
+streamlit_option_menu==0.4.0
+streamlit_authenticator==0.1.5
+streamlit_navigation_bar==3.3.0
+streamlit_option_menu==0.4.0
+azure-cognitiveservices-speech== 1.41.1

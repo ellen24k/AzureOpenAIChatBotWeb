@@ -57,5 +57,3 @@ def load_view():
 
     # todo 마이크입력 STT 처리하기
     # todo 뻐끔뻐끔
-    # todo requirement  생성처리 버전까지
-    # todo 입장 번호 입력
