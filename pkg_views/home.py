@@ -7,9 +7,17 @@ from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
 from pkg_utils.stt import synthesize_speech
 from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file
-
+import os
 
 def load_view():
+
+
+    def list_files(directory):
+        return os.listdir(directory)
+
+    files = list_files('temp')
+    st.write(files)  # Streamlit에서 파일 목록 표시
+
     img_url = None
     content = None
 
