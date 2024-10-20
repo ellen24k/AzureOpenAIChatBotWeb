@@ -21,6 +21,7 @@ def load_view():
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.'):
             autoplay_audio(
                 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/msg_wait.wav')
+            st.audio('https://uzefbkvgsuzmopxjxymz.supabase.co/storage/v1/object/public/ChatBotFiles/beep.wav', format='audio/wav', autoplay=True)
             content = make_poem(user_input)
             time.sleep(5)  #
 
