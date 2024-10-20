@@ -30,7 +30,7 @@ def login_page():
 
         url2 = st.text_input(
             'URL2',
-            ' https://5789-115-23-174-157.ngrok-free.app ')
+            ' https://5789-1-1-1-1.ngrok-free.app ')
         if st.button('짧은 URL 생성2'):
             s_url2=shorten_url(url2)
             st.image(url_to_qr_code(s_url2))
