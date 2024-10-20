@@ -31,7 +31,7 @@ def load_view():
 
         if not img_url:
             img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
-            st.write('부적절한 단어가 생성되어 기본 이미지를 사용합니다.')
+            st.write('부적절한 단어가 사용되어 기본 이미지를 사용합니다.')
 
         with st.spinner('오디오를 생성 중 입니다.'):
             synthesize_speech(content, filename='temp/' + file_name + '.wav', ssml=True)
@@ -51,3 +51,6 @@ def load_view():
 
     #todo 화면 좀 위로 올릴 수 있나 보기
     #todo 마이크입력 STT 처리하기
+    #todo 뻐끔뻐끔
+    #todo requirement  생성처리 버전까지
+    #todo real에 temp wav 확인
