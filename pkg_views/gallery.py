@@ -6,9 +6,7 @@ from pkg_utils.utils import padding_set
 
 def load_view():
     padding_set()
-
     data = fetch_data()
-
     if data.empty:
         st.write("No data available or table does not exist.")
     else:

@@ -29,10 +29,9 @@ def load_view():
                 st.image(row['img_url'], use_column_width=True, caption=f"{row['content']}")
                 if st.button(row['date'] + ' 삭제'):
                     delete_data(row['date'])
-                    file_name=datetime.strptime(row['date'],"%Y-%m-%dT%H:%M:%S.%f").strftime("%Y%m%d%H%M%S%f")
+                    file_name = datetime.strptime(row['date'], "%Y-%m-%dT%H:%M:%S.%f").strftime("%Y%m%d%H%M%S%f")
                     delete_file("ChatBotFiles", file_name + '.png')
                     delete_file("ChatBotFiles", file_name + '.wav')
                     st.rerun()
 
                 st.markdown("---")
-

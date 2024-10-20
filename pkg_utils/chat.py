@@ -1,5 +1,6 @@
 from langchain_openai import AzureChatOpenAI
 
+
 def make_poem(user_input):
     chat_model = AzureChatOpenAI()
     # st.write(f"[사용자]\n")

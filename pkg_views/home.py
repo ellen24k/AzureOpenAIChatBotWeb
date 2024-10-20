@@ -55,7 +55,6 @@ def load_view():
 
         st.success('모든 작업이 완료 되었습니다.')
 
-    # todo 화면 좀 위로 올릴 수 있나 보기
     # todo 마이크입력 STT 처리하기
     # todo 뻐끔뻐끔
     # todo requirement  생성처리 버전까지

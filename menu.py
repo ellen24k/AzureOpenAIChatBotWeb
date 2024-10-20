@@ -1,6 +1,6 @@
 import streamlit as st
-
 from streamlit_option_menu import option_menu
+
 from pkg_views import home, about, gallery, admin
 
 

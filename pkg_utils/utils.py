@@ -1,14 +1,15 @@
-import pyshorteners
-import os
 import shutil
 from datetime import datetime
-import streamlit as st
+
+import pyshorteners
 import requests
-import json
+import streamlit as st
+
 
 def copy_file(source_file, destination_file):
     shutil.copy(source_file, destination_file)
     print(f"파일이 {source_file}에서 {destination_file}로 복사되었습니다.")
+
 
 def download_file(url, destination_file):
     response = requests.get(url, stream=True)
@@ -20,29 +21,10 @@ def download_file(url, destination_file):
 
     print(f"파일이 {url}에서 {destination_file}로 다운로드되었습니다.")
 
-def save_text_to_file(text, file_path):
-    with open(file_path, 'w', encoding='utf-8') as file:
-        file.write(text)
-    print(f"텍스트가 {file_path}에 저장되었습니다.")
 
 def get_current_time_no_spaces():
     return datetime.now().strftime('%Y%m%d%H%M%S%f')
 
-def extract_title_from_txt(filename):
-    with open(f'history/{filename}.txt', 'r', encoding='utf-8') as file:
-        text = file.read()
-    temp = text.split(',')
-    title = ''.join([line.split(':')[0].strip() for line in temp])
-    return title
-
-def delete_history(filename):
-    try:
-        os.remove(f'history/{filename}.png')
-        os.remove(f'history/{filename}.wav')
-        os.remove(f'history/{filename}.txt')
-        print(f'history {filename} deleted.')
-    except Exception as e:
-        print(f"Error deleting history: {e}")
 
 # def autoSelectDevice():
 #     p = pyaudio.PyAudio()
@@ -63,11 +45,13 @@ def delete_history(filename):
 #     return audioDeviceIndex1, audioDeviceIndex2
 from urllib.parse import urlparse, parse_qs
 
+
 def extract_ske_value(url):
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
     sv_value = query_params.get('ske', [None])[0]
     return sv_value
+
 
 def autoplay_audio(file_path):
     audio_html = f"""
@@ -76,6 +60,7 @@ def autoplay_audio(file_path):
     </audio>
     """
     st.markdown(audio_html, unsafe_allow_html=True)
+
 
 def padding_set():
     css = """
@@ -95,6 +80,7 @@ def shorten_url(url):
     s = pyshorteners.Shortener()
     ret_url = s.tinyurl.short(url)
     return ret_url
+
 
 def url_to_qr_code(url):
     qr_code = f"https://api.qrserver.com/v1/create-qr-code/?size=400x400&data={url}"

@@ -30,12 +30,14 @@ def insert_data(img_url, wav_url, title, content):
     except APIError as e:
         return None
 
+
 def delete_data(date):
     try:
         response = supabase.table('data').delete().eq('date', date).execute()
         return response
     except APIError as e:
         return None
+
 
 def upload_file(bucket_name: str, src_file_path: str, dest_file_name: str) -> str:
     try:
@@ -49,6 +51,7 @@ def upload_file(bucket_name: str, src_file_path: str, dest_file_name: str) -> st
         return f"Error uploading file: {e.message}"
     except Exception as e:
         return f"An unexpected error occurred: {str(e)}"
+
 
 def delete_file(bucket_name: str, file_name: str) -> str:
     try:
