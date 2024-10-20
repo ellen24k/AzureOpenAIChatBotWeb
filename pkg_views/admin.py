@@ -6,6 +6,8 @@ from pkg_utils.utils import padding_set
 
 
 def load_view():
+    padding_set()
+
     if st.session_state['logged_in'] == False or st.session_state['admin'] == False:
         admin_pass = st.text_input('관리자 비밀번호를 입력하세요.')
         if st.button('관리자 로그인'):
@@ -17,7 +19,6 @@ def load_view():
                 st.write('관리자 로그인 성공')
                 st.rerun()
     else:
-        padding_set()
         st.title('관리자')
 
         data = fetch_data()
