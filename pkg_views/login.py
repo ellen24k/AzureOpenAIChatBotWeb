@@ -20,6 +20,7 @@ def login_page():
             st.error('입장코드가 틀렸습니다.')
 
 
+    st.markdown("---")
     if st.button('짧은 URL 생성'):
         url = st.text_input(
             'URL1',
