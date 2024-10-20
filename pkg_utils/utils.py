@@ -1,3 +1,4 @@
+import pyshorteners
 import os
 import shutil
 from datetime import datetime
@@ -81,10 +82,20 @@ def padding_set():
     <style>
     .stMainBlockContainer.block-container.st-emotion-cache-13ln4jf.ea3mdgi5 {
         padding-top: 48px;
-        padding-right: 0px;
-        padding-bottom: 0px;
-        padding-left: 0px;
+        padding-right: 4px;
+        padding-bottom: 4px;
+        padding-left: 4px;
     }
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
+
+
+def shorten_url(url):
+    s = pyshorteners.Shortener()
+    ret_url = s.tinyurl.short(url)
+    return ret_url
+
+def url_to_qr_code(url):
+    qr_code = f"https://api.qrserver.com/v1/create-qr-code/?size=400x400&data={url}"
+    return qr_code

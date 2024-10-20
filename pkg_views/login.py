@@ -1,6 +1,6 @@
 import streamlit as st
 
-from pkg_utils.utils import padding_set
+from pkg_utils.utils import padding_set, shorten_url, url_to_qr_code
 
 
 def login_page():
@@ -8,7 +8,8 @@ def login_page():
     #password로 하면 비밀번호 저장 화면 계속 떠서 일반 text로 변경
     password = st.text_input('입장코드를 입력하세요.[개발자의 이름 세글자]')
     correct_password = st.secrets["passwords"]["login_password"]
-    st.balloons()
+
+
     if st.button('입장'):
         if password == correct_password:
             st.success('성공')
@@ -16,3 +17,11 @@ def login_page():
             st.rerun()
         else:
             st.error('입장코드가 틀렸습니다.')
+
+
+
+    url = st.text_input('짧은 URL 및 QR코드를 생성하기 위해 URL을 입력하세요.','https://azureopenaichatbotweb-eqbdxzpg3qqrctguzxaw2a.streamlit.app/')
+    if st.button('짧은 URL 생성'):
+        s_url=shorten_url(url)
+        st.write(s_url)
+        st.image(url_to_qr_code(s_url))
