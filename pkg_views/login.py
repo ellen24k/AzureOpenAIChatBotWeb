@@ -28,10 +28,10 @@ def login_page():
             s_url=shorten_url(url)
             st.image(url_to_qr_code(s_url))
 
-        url = st.text_input(
+        url2 = st.text_input(
             '짧은 URL 및 QR코드를 생성하기 위해 URL을 입력하세요.',
             ' https://5789-115-23-174-157.ngrok-free.app ')
         if st.button('짧은 URL 생성'):
-            s_url=shorten_url(url)
-            st.image(url_to_qr_code(s_url))
+            s_url2=shorten_url(url2)
+            st.image(url_to_qr_code(s_url2))
 
