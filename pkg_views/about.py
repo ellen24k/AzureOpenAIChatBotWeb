@@ -1,7 +1,9 @@
 import streamlit as st
+from streamlit import secrets
 
-from pkg_db.db import fetch_data, delete_data
+
 from pkg_utils.utils import padding_set
+from pkg_views import admin
 
 
 def load_view():
@@ -12,17 +14,11 @@ def load_view():
     st.write('만든이 : 김태영')
     st.markdown("---")
 
-    st.text_input('관리자 툴 비밀번호를 입력하세요.')
+    admin_pass=st.text_input('관리자 툴 비밀번호를 입력하세요.')
     if st.button('관리자 툴'):
-        data = fetch_data()
-
-        if data.empty:
-            st.write("No data available or table does not exist.")
+        if admin_pass == secrets["passwords"]["admin_password"]:
+            st.session_state['admin'] = True
+            admin.load_view()
+            #이동
         else:
-            for index, row in data.iterrows():
-                st.image(row['img_url'], use_column_width=False, caption=f"{row['content']}", width=200)
-                if st.button('삭제'):
-                    delete_data(row['date'])
-                    st.rerun()
-
-                st.markdown("---")
+            st.error('비밀번호가 틀렸습니다.')
