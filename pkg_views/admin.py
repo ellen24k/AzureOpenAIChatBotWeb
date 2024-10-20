@@ -11,27 +11,28 @@ def load_view():
         if st.button('관리자 로그인'):
             if admin_pass != st.secrets["passwords"]["admin_password"]:
                 st.error('비밀번호가 틀렸습니다.')
+                st.stop()
             else:
                 st.session_state['admin'] = True
                 st.write('관리자 로그인 성공')
                 st.rerun()
-
-    padding_set()
-    st.title('관리자')
-
-    data = fetch_data()
-
-    if data.empty:
-        st.write("No data available or table does not exist.")
     else:
-        for index, row in data.iterrows():
-            st.image(row['img_url'], use_column_width=True, caption=f"{row['content']}")
-            if st.button(row['date'] + ' 삭제'):
-                delete_data(row['date'])
-                file_name=datetime.strptime(row['date'],"%Y-%m-%dT%H:%M:%S.%f").strftime("%Y%m%d%H%M%S%f")
-                delete_file("ChatBotFiles", file_name + '.png')
-                delete_file("ChatBotFiles", file_name + '.wav')
-                st.rerun()
+        padding_set()
+        st.title('관리자')
 
-            st.markdown("---")
+        data = fetch_data()
+
+        if data.empty:
+            st.write("No data available or table does not exist.")
+        else:
+            for index, row in data.iterrows():
+                st.image(row['img_url'], use_column_width=True, caption=f"{row['content']}")
+                if st.button(row['date'] + ' 삭제'):
+                    delete_data(row['date'])
+                    file_name=datetime.strptime(row['date'],"%Y-%m-%dT%H:%M:%S.%f").strftime("%Y%m%d%H%M%S%f")
+                    delete_file("ChatBotFiles", file_name + '.png')
+                    delete_file("ChatBotFiles", file_name + '.wav')
+                    st.rerun()
+
+                st.markdown("---")
 
