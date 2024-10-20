@@ -67,9 +67,9 @@ def padding_set():
     <style>
     .stMainBlockContainer.block-container.st-emotion-cache-13ln4jf.ea3mdgi5 {
         padding-top: 48px;
-        padding-right: 4px;
-        padding-bottom: 4px;
-        padding-left: 4px;
+        padding-right: 2px;
+        padding-bottom: 2px;
+        padding-left: 2px;
     }
     </style>
     """
@@ -85,3 +85,10 @@ def shorten_url(url):
 def url_to_qr_code(url):
     qr_code = f"https://api.qrserver.com/v1/create-qr-code/?size=400x400&data={url}"
     return qr_code
+
+def extract_filename(url):
+    start = url.rfind('/') + 1
+    end = url.find('?', start)
+    if start != -1 and end != -1:
+        return url[start:end]
+    return None

@@ -5,21 +5,21 @@ from pkg_views import home, about, gallery, admin
 
 
 def menu():
-    options = ["ChatBot", "Gallery", "About", "Admin"]
+    options = ["ChatBot", "Gallery", "Admin", "About"]
 
     menu_style = {
         "container": {"width:": "100%", "display": "flex", "justify-content": "space-between",
                       "padding": "0!important"},
-        "icon": {"color": "white", "font-size": "1.2em"},
-        "nav-link": {"color": "white", "font-size": "1.0em", "padding": "0 1em", "text-decoration": "none",
+        "icon": {"color": "white", "font-size": "1.5em"},
+        "nav-link": {"color": "white", "font-size": "1.0em", "padding": "0 0.5em", "text-decoration": "none",
                      "--hover-color": "grey"},
-        "nav-link-selected": {"color": "white", "font-size": "1.0em", "padding": "0 1em", "text-decoration": "none"},
+        "nav-link-selected": {"color": "white", "font-size": "1.0em", "padding": "0 0.5em", "text-decoration": "none"},
     }
 
     selected_option = option_menu(
         menu_title=None,
         options=options,
-        icons=["robot", "image", "book", "lock"],
+        icons=["robot", "image", "lock", "book"],
         orientation="horizontal",
         styles=menu_style,
         default_index=0
@@ -33,10 +33,10 @@ def menu():
             home.load_view()
         elif selected_option == "Gallery":
             gallery.load_view()
-        elif selected_option == "About":
-            about.load_view()
         elif selected_option == "Admin":
             admin.load_view()
+        elif selected_option == "About":
+            about.load_view()
         elif selected_option is None:
             home.load_view()
 

@@ -5,6 +5,7 @@ from pkg_utils.utils import padding_set
 
 
 def load_view():
+    st.session_state['mic_input'] = ''
     padding_set()
     data = fetch_data()
     if data.empty:
