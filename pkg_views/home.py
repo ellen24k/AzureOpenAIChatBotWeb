@@ -21,7 +21,7 @@ def load_view():
         with st.spinner('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.'):
             autoplay_audio(
                 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/msg_wait.wav')
-            st.audio('https://uzefbkvgsuzmopxjxymz.supabase.co/storage/v1/object/public/ChatBotFiles/beep.wav', format='audio/wav', autoplay=True)
+            # st.audio('https://uzefbkvgsuzmopxjxymz.supabase.co/storage/v1/object/public/ChatBotFiles/beep.wav', format='audio/wav', autoplay=True)
             content = make_poem(user_input)
             time.sleep(5)  #
 
@@ -47,7 +47,7 @@ def load_view():
             wav_file_url = upload_file("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
             insert_data(png_file_url, wav_file_url, user_input, content)
 
-        st.success('3행시가 생성되었습니다.')
+        st.success('모든 작업이 완료 되었습니다.')
 
 
     #todo 화면 좀 위로 올릴 수 있나 보기
