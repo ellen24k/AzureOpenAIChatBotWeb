@@ -29,3 +29,4 @@ if __name__ == '__main__':
     menu_hide()
     main()
 
+# ngrok http 8501
