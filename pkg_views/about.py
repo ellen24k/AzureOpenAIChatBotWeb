@@ -19,6 +19,5 @@ def load_view():
         if admin_pass == secrets["passwords"]["admin_password"]:
             st.session_state['admin'] = True
             admin.load_view()
-            #이동
         else:
             st.error('비밀번호가 틀렸습니다.')
