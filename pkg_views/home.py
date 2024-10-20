@@ -17,6 +17,7 @@ def load_view():
 
     files = list_files('temp')
     st.write(files)  # Streamlit에서 파일 목록 표시
+    os.remove('temp/*')
 
     img_url = None
     content = None
