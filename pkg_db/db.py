@@ -53,6 +53,7 @@ def upload_file(bucket_name: str, src_file_path: str, dest_file_name: str) -> st
 def delete_file(bucket_name: str, file_name: str) -> str:
     try:
         response = supabase.storage.from_(bucket_name).remove(file_name)
+        print(response)
         return response
     except APIError as e:
         return f"Error deleting file: {e.message}"

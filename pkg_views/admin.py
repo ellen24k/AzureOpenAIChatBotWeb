@@ -1,22 +1,37 @@
+from datetime import datetime
+
 import streamlit as st
 from pkg_db.db import fetch_data, delete_data, delete_file
+from pkg_utils.utils import padding_set
 
 
 def load_view():
-    if st.session_state['admin'] == True:
-        data = fetch_data()
+    if st.session_state['logged_in'] == False or st.session_state['admin'] == False:
+        admin_pass = st.text_input('관리자 비밀번호를 입력하세요.')
+        if st.button('관리자 로그인'):
+            if admin_pass != st.secrets["passwords"]["admin_password"]:
+                st.error('비밀번호가 틀렸습니다.')
+            else:
+                st.session_state['admin'] = True
+                st.write('관리자 로그인 성공')
+                st.rerun()
 
-        if data.empty:
-            st.write("No data available or table does not exist.")
-        else:
-            for index, row in data.iterrows():
-                st.image(row['img_url'], use_column_width=False, caption=f"{row['content']}", width=200)
-                if st.button(row['date'] + ' 삭제'):
-                    delete_data(row['date'])
-                    delete_file("ChatBotFiles", row['date'] + '.png')
-                    delete_file("ChatBotFiles", row['date'] + '.wav')
-                    st.rerun()
+    padding_set()
+    st.title('관리자')
 
-                st.markdown("---")
+    data = fetch_data()
+
+    if data.empty:
+        st.write("No data available or table does not exist.")
     else:
-        st.write('관리자만 접근 가능합니다.')
+        for index, row in data.iterrows():
+            st.image(row['img_url'], use_column_width=True, caption=f"{row['content']}")
+            if st.button(row['date'] + ' 삭제'):
+                delete_data(row['date'])
+                file_name=datetime.strptime(row['date'],"%Y-%m-%dT%H:%M:%S.%f").strftime("%Y%m%d%H%M%S%f")
+                delete_file("ChatBotFiles", file_name + '.png')
+                delete_file("ChatBotFiles", file_name + '.wav')
+                st.rerun()
+
+            st.markdown("---")
+
