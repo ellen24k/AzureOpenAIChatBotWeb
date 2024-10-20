@@ -13,7 +13,7 @@ def load_view():
     img_url = None
     content = None
 
-    user_input = st.text_input('**3행시를 만들 3글자를 입력하세요:**')
+    user_input = st.text_input('**삼행시를 만들 3글자를 입력하세요:**')
 
     if st.button('3행시 만들기'):
         file_name = get_current_time_no_spaces()
