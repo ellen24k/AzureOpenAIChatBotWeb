@@ -11,9 +11,9 @@ def menu():
         "container": {"width:": "100%", "display": "flex", "justify-content": "space-between",
                       "padding": "0!important"},
         "icon": {"color": "white", "font-size": "1.2em"},
-        "nav-link": {"color": "white", "font-size": "0.8em", "padding": "0 1em", "text-decoration": "none",
+        "nav-link": {"color": "white", "font-size": "1.0em", "padding": "0 1em", "text-decoration": "none",
                      "--hover-color": "grey"},
-        "nav-link-selected": {"color": "white", "font-size": "0.8em", "padding": "0 1em", "text-decoration": "none"},
+        "nav-link-selected": {"color": "white", "font-size": "1.0em", "padding": "0 1em", "text-decoration": "none"},
     }
 
     selected_option = option_menu(
