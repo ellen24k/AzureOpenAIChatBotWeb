@@ -11,21 +11,6 @@ import os
 
 def load_view():
 
-
-    def list_files(directory):
-        return os.listdir(directory)
-
-    files = list_files('temp')
-    st.write(files)  # Streamlit에서 파일 목록 표시
-
-    def delete_files(directory):
-        for file in os.listdir(directory):
-            file_path = os.path.join(directory, file)
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-    delete_files('temp')
-
-
     img_url = None
     content = None
 
@@ -57,11 +42,15 @@ def load_view():
             st.image(img_url, use_column_width=True, caption=f'{content}')
             st.audio('temp/' + file_name + '.wav', format='audio/wav', autoplay=True)
 
-        with st.spinner('데이타베이스에 저장 중 입니다.'):
+        with st.spinner('데이터를 저장 중 입니다.'):
             download_file(img_url, 'temp/' + file_name + '.png')
             png_file_url = upload_file("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
             wav_file_url = upload_file("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
             insert_data(png_file_url, wav_file_url, user_input, content)
+
+        with st.spinner('임시파일을 제거합니다.'):
+            os.remove('temp/' + file_name + '.png')
+            os.remove('temp/' + file_name + '.wav')
 
         st.success('모든 작업이 완료 되었습니다.')
 
@@ -70,4 +59,4 @@ def load_view():
     #todo 마이크입력 STT 처리하기
     #todo 뻐끔뻐끔
     #todo requirement  생성처리 버전까지
-    #todo real에 temp wav 확인
+    #todo 입장 번호 입력
