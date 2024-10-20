@@ -25,6 +25,7 @@ def load_view():
                 os.remove(file_path)
     delete_files('temp')
 
+
     img_url = None
     content = None
 
