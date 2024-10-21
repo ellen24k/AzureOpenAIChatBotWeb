@@ -1,0 +1,33 @@
+@startuml
+title Deployment Diagram
+
+actor User
+
+node "User's Device (Browser)" {
+    [Streamlit App]
+}
+
+node "GitHub" {
+    [GitHub Repository]
+}
+
+node "Supabase" {
+    [Supabase PostreSQL]
+    [Supabase Storage]
+}
+
+node "Azure Services" {
+    [Azure OpenAI ChatGPT]
+    [Azure OpenAI Dalle3]
+    [Azure TTS]
+}
+
+User -- [Streamlit App]
+[Streamlit App] - [GitHub Repository] : CodeBase
+[Streamlit App] --- [Supabase Storage] : Data Storage
+[Streamlit App] --- [Supabase PostreSQL] : Database
+[Streamlit App] ---- [Azure OpenAI ChatGPT] : Chatbot
+[Streamlit App] ---- [Azure TTS] : Text-to-Speech
+[Streamlit App] ---- [Azure OpenAI Dalle3] : Image Generation
+
+@enduml
