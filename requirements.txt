@@ -12,4 +12,4 @@ streamlit_option_menu==0.4.0
 streamlit_authenticator==0.1.5
 streamlit_navigation_bar==3.3.0
 streamlit_option_menu==0.4.0
-azure-cognitiveservices-speech== 1.41.1
+azure-cognitiveservices-speech==1.41.1
