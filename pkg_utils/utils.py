@@ -49,9 +49,9 @@ def padding_set():
     <style>
     .stMainBlockContainer.block-container.st-emotion-cache-13ln4jf.ea3mdgi5 {
         padding-top: 48px;
-        padding-right: 2px;
-        padding-bottom: 2px;
-        padding-left: 2px;
+        padding-right: 4px;
+        padding-bottom: 4px;
+        padding-left: 4px;
     }
     </style>
     """
