@@ -7,3 +7,4 @@ langchain_openai
 supabase
 pyshorteners
 SpeechRecognition
+azure-cognitiveservices-speech
