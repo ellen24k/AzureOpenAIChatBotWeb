@@ -1,13 +1,13 @@
 import streamlit as st
 
-from pkg_db.db import fetch_data
+from pkg_db.db import fetch_all_data
 from pkg_utils.utils import padding_set
 
 
 def load_view():
     st.session_state['mic_input'] = ''
     padding_set()
-    data = fetch_data()
+    data = fetch_all_data()
     if data.empty:
         st.write("No data available or table does not exist.")
     else:

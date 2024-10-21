@@ -4,7 +4,7 @@ from streamlit_option_menu import option_menu
 from pkg_views import home, about, gallery, admin
 
 
-def menu():
+def menu_page():
     options = ["ChatBot", "Gallery", "Admin", "About"]
 
     menu_style = {

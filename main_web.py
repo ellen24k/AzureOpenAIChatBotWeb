@@ -1,7 +1,8 @@
 import streamlit as st
 
+from pkg_utils.utils import menu_hide
 from pkg_views.login import login_page
-from menu import menu
+from pkg_views.menu import menu_page
 
 
 def main():
@@ -9,21 +10,10 @@ def main():
         st.session_state['logged_in'] = False
 
     if st.session_state['logged_in']:
-        menu()
+        menu_page()
     else:
         login_page()
 
-
-def menu_hide():
-    # .stAppToolbar {visibility: hidden;}
-    hide_streamlit_style = """
-<style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-.stToolbarActionButton {visibility: hidden;}
-</style>
-"""
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
     menu_hide()

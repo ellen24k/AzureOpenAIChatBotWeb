@@ -8,7 +8,7 @@ supabase_key = st.secrets["SUPABASE_KEY"]
 supabase: Client = create_client(supabase_url, supabase_key)
 
 
-def fetch_data():
+def fetch_all_data():
     try:
         response = supabase.table('data').select('*').order('date', desc=True).execute()
         data = response.data
@@ -39,7 +39,7 @@ def delete_data(date):
         return None
 
 
-def upload_file(bucket_name: str, src_file_path: str, dest_file_name: str) -> str:
+def file_upload(bucket_name: str, src_file_path: str, dest_file_name: str) -> str:
     try:
         with open(src_file_path, "rb") as file:
             file_content = file.read()
@@ -53,7 +53,7 @@ def upload_file(bucket_name: str, src_file_path: str, dest_file_name: str) -> st
         return f"An unexpected error occurred: {str(e)}"
 
 
-def delete_file(bucket_name: str, file_name: str) -> str:
+def file_delete(bucket_name: str, file_name: str) -> str:
     try:
         response = supabase.storage.from_(bucket_name).remove(file_name)
         print(response)

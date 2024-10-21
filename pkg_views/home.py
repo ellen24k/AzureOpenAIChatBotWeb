@@ -1,63 +1,20 @@
 import os
-import time
 from time import sleep
 
-import streamlit.components.v1 as components
 import streamlit as st
 
-from pkg_db.db import insert_data, upload_file
+from pkg_db.db import insert_data, file_upload
+from pkg_utils.ProgressBar import ProgressBar
 from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
 from pkg_utils.tts import synthesize_speech
-from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set
-
-
-class ProgressBar:
-    def __init__(self, text):
-        self.text = text
-
-    def __enter__(self):
-        self.progress = st.progress(0, text=self.text)
-        return self.progress
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.progress.empty()
-
-    def change_progress(self, text, from_percent, to_percent):
-        self.text = text
-        for percent_complete in range(from_percent, to_percent):
-            time.sleep(0.05)
-            self.progress.progress(percent_complete + 1, text='[' + str(percent_complete + 1) + '%] ' + self.text)
-        sleep(0.5)
-
-    def empty(self):
-        self.progress.empty()
+from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set, scroll_here
 
 
 def load_view():
-    # live_2d()
     padding_set()
     img_url = None
     content = None
-
-    # if 'mic_input' not in st.session_state:
-    #     st.session_state['mic_input'] = ''
-    #
-    # if st.button('마이크로 입력하기'):
-    #     with spinner('마이크가 작동중 입니다. 지금 말하세요.'):
-    #         try:
-    #             recognition_result = recognize_speech()
-    #         except Exception as e:
-    #             st.error(f'마이크 입력에 실패했습니다.{e}')
-    #             recognition_result = None
-    #
-    #         if recognition_result:
-    #             st.session_state['mic_input'] = recognition_result.replace('.', '')
-    #         else:
-    #             st.session_state['mic_input'] = ''
-    #             st.info('마이크 입력 버튼을 다시 누르거나 직접 입력하세요.')
-    #
-    # user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**', value=st.session_state['mic_input'])
 
     user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**')
 
@@ -92,8 +49,8 @@ def load_view():
 
                 pbar.change_progress('데이터를 저장 중 입니다.', 70, 80)
                 download_file(img_url, 'temp/' + file_name + '.png')
-                png_file_url = upload_file("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
-                wav_file_url = upload_file("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
+                png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
+                wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
                 insert_data(png_file_url, wav_file_url, user_input, content)
 
                 st.title(user_input)
@@ -105,23 +62,10 @@ def load_view():
                 pbar.empty()
                 st.balloons()
 
-                html_code = """
-                        <div id="scroll-target" style="margin-top: 1000px;"></div>
-                        <script>
-                          function scrollToTarget() {
-                            document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
-                          }
-                          window.onload = scrollToTarget;
-                        </script>
-                    """
-
-                components.html(html_code, height=0)
+                scroll_here()
 
                 try:
                     os.remove('temp/' + file_name + '.png')
                     os.remove('temp/' + file_name + '.wav')
                 except Exception as e:
                     print(e)
-
-                # st.session_state['mic_input'] = ''
-

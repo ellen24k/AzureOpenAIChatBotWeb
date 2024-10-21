@@ -41,7 +41,7 @@ def login_page():
 
         url2 = st.text_input(
             'ngrok URL',
-            'https://5789-1-1-1-1.ngrok-free.app')
+            'https://1-1-1-1-1.ngrok-free.app')
         if st.button('ngrok short URL/QR 생성'):
             s_url2 = shorten_url(url2)
             st.write(s_url2)

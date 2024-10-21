@@ -3,12 +3,11 @@ import os
 
 import streamlit as st
 
-from pkg_db.db import fetch_data, delete_data, delete_file
+from pkg_db.db import fetch_all_data, delete_data, file_delete
 from pkg_utils.utils import padding_set, extract_filename
 
 
 def load_view():
-    # st.session_state['mic_input'] = ''
     padding_set()
 
     if st.session_state['logged_in'] == False or st.session_state['admin'] == False:
@@ -53,8 +52,7 @@ def load_view():
         if st.button('임시 파일 삭제'):
             delete_temp_files()
 
-
-        data = fetch_data()
+        data = fetch_all_data()
 
         if data.empty:
             st.write("No data available or table does not exist.")
@@ -66,8 +64,8 @@ def load_view():
                     img_file_name = extract_filename(row['img_url'])
                     wav_file_name = extract_filename(row['wav_url'])
 
-                    delete_file("ChatBotFiles", img_file_name)
-                    delete_file("ChatBotFiles", wav_file_name)
+                    file_delete("ChatBotFiles", img_file_name)
+                    file_delete("ChatBotFiles", wav_file_name)
                     st.rerun()
 
                 st.markdown("---")
