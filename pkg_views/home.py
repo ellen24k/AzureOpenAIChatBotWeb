@@ -13,7 +13,7 @@ from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download
 
 
 def load_view():
-    live_2d()
+    # live_2d()
     padding_set()
     img_url = None
     content = None
