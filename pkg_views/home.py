@@ -26,7 +26,7 @@ def load_view():
             try:
                 recognition_result = recognize_speech()
             except Exception as e:
-                st.error(f'마이크 입력에 실패했습니다.')
+                st.error(f'마이크 입력에 실패했습니다.{e}')
                 recognition_result = None
 
             if recognition_result:
