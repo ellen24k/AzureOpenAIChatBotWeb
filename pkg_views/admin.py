@@ -8,7 +8,7 @@ from pkg_utils.utils import padding_set, extract_filename
 
 
 def load_view():
-    st.session_state['mic_input'] = ''
+    # st.session_state['mic_input'] = ''
     padding_set()
 
     if st.session_state['logged_in'] == False or st.session_state['admin'] == False:

@@ -125,5 +125,3 @@ def load_view():
 
                 # st.session_state['mic_input'] = ''
 
-    # 뻐끔뻐끔
-    # 이미지나 wav까지 스크롤
