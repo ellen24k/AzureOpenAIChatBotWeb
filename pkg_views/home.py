@@ -25,7 +25,7 @@ def load_view():
     if st.button('마이크로 입력하기'):
         with spinner('마이크가 작동중 입니다. 지금 말하세요.'):
             try:
-                recognition_result = asyncio.run(recognize_speech())
+                recognition_result = recognize_speech()
             except Exception as e:
                 st.error(f'마이크 입력에 실패했습니다.')
                 recognition_result = None
