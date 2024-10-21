@@ -18,24 +18,26 @@ def load_view():
     img_url = None
     content = None
 
-    if 'mic_input' not in st.session_state:
-        st.session_state['mic_input'] = ''
+    # if 'mic_input' not in st.session_state:
+    #     st.session_state['mic_input'] = ''
+    #
+    # if st.button('마이크로 입력하기'):
+    #     with spinner('마이크가 작동중 입니다. 지금 말하세요.'):
+    #         try:
+    #             recognition_result = recognize_speech()
+    #         except Exception as e:
+    #             st.error(f'마이크 입력에 실패했습니다.{e}')
+    #             recognition_result = None
+    #
+    #         if recognition_result:
+    #             st.session_state['mic_input'] = recognition_result.replace('.', '')
+    #         else:
+    #             st.session_state['mic_input'] = ''
+    #             st.info('마이크 입력 버튼을 다시 누르거나 직접 입력하세요.')
 
-    if st.button('마이크로 입력하기'):
-        with spinner('마이크가 작동중 입니다. 지금 말하세요.'):
-            try:
-                recognition_result = recognize_speech()
-            except Exception as e:
-                st.error(f'마이크 입력에 실패했습니다.{e}')
-                recognition_result = None
+    # user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**', value=st.session_state['mic_input'])
 
-            if recognition_result:
-                st.session_state['mic_input'] = recognition_result.replace('.', '')
-            else:
-                st.session_state['mic_input'] = ''
-                st.info('마이크 입력 버튼을 다시 누르거나 직접 입력하세요.')
-
-    user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**', value=st.session_state['mic_input'])
+    user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**')
 
     if len(user_input) != 3:
         st.error('세글자를 입력해주세요.')
@@ -87,7 +89,7 @@ def load_view():
                 st.info('임시파일을 제거했습니다.')
 
             st.success('모든 작업이 완료 되었습니다.')
-            st.session_state['mic_input'] = ''
+            # st.session_state['mic_input'] = ''
 
     # 뻐끔뻐끔
     # 이미지나 wav까지 스크롤
