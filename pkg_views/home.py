@@ -70,37 +70,38 @@ def load_view():
             with pbar:
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/msg_wait.wav')
-                pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 0, 10)
+                pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 0, 15)
                 content = make_poem(user_input)
                 sleep(3)
 
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
 
-                pbar.change_progress('이미지를 생성 중 입니다.', 10, 20)
+                pbar.change_progress('이미지를 생성 중 입니다.', 15, 30)
                 img_url = generate_image(content)  #
 
                 if not img_url:
                     img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
-                    pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 20, 30)
+                    pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 30, 50)
                 else:
-                    pbar.change_progress('이미지 생성이 완료되었습니다.', 20, 30)
+                    pbar.change_progress('이미지 생성이 완료되었습니다.', 30, 50)
 
-                pbar.change_progress('오디오를 생성 중 입니다.', 30, 40)
+                pbar.change_progress('오디오를 생성 중 입니다.', 50, 60)
                 synthesize_speech(content, filename='temp/' + file_name + '.wav', ssml=True)
-                pbar.change_progress('오디오 생성이 완료되었습니다.', 40, 50)
+                pbar.change_progress('오디오 생성이 완료되었습니다.', 60, 70)
 
-                pbar.change_progress('데이터를 저장 중 입니다.', 50, 60)
+                pbar.change_progress('데이터를 저장 중 입니다.', 70, 80)
                 download_file(img_url, 'temp/' + file_name + '.png')
                 png_file_url = upload_file("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
                 wav_file_url = upload_file("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
                 insert_data(png_file_url, wav_file_url, user_input, content)
 
+                st.title(user_input)
                 st.image(img_url, use_column_width=True, caption=f'{content}')
-                pbar.change_progress('결과를 출력 하는 중 입니다.', 60, 90)
+                pbar.change_progress('결과를 출력 하는 중 입니다.', 80, 95)
                 st.audio('temp/' + file_name + '.wav', format='audio/wav', autoplay=True)
 
-                pbar.change_progress('작업을 완료 하는 중 입니다.', 90, 100)
+                pbar.change_progress('작업을 완료 하는 중 입니다.', 95, 100)
                 pbar.empty()
                 st.balloons()
 

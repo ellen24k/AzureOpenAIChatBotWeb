@@ -11,7 +11,7 @@ client = AzureOpenAI(
 
 
 def generate_image(prompt: str):
-    prompt = prompt + "\nA vibrant painting in the style of a famous artist. Draw the given word as the theme."
+    prompt = prompt + "\nA vibrant painting in the style of a famous artist."
 
     try:
         result = client.images.generate(
