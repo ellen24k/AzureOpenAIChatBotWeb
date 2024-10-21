@@ -8,3 +8,4 @@ supabase
 pyshorteners
 SpeechRecognition
 azure-cognitiveservices-speech
+pyaudio
