@@ -1,3 +1,6 @@
+import glob
+import os
+
 import streamlit as st
 
 from pkg_db.db import fetch_data, delete_data, delete_file
@@ -20,6 +23,36 @@ def load_view():
                 st.rerun()
     else:
         st.title('관리자')
+
+        def list_temp_files():
+            temp_dir = 'temp'
+            if os.path.exists(temp_dir):
+                files = os.listdir(temp_dir)
+                for file in files:
+                    print(file)
+            else:
+                print(f"'{temp_dir}' 디렉토리가 존재하지 않습니다.")
+
+        list_temp_files()
+
+        def delete_temp_files():
+            temp_dir = 'temp'
+            if os.path.exists(temp_dir):
+                wav_files = glob.glob(os.path.join(temp_dir, '*.wav'))
+                png_files = glob.glob(os.path.join(temp_dir, '*.png'))
+
+                for file in wav_files + png_files:
+                    try:
+                        os.remove(file)
+                        print(f"{file} 삭제 완료")
+                    except Exception as e:
+                        print(f"{file} 삭제 실패: {e}")
+            else:
+                print(f"'{temp_dir}' 디렉토리가 존재하지 않습니다.")
+
+        if st.button('임시 파일 삭제'):
+            delete_temp_files()
+
 
         data = fetch_data()
 

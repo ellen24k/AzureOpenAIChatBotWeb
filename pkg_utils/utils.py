@@ -1,3 +1,4 @@
+import streamlit.components.v1 as components
 import shutil
 from datetime import datetime
 
@@ -134,3 +135,17 @@ def extract_filename(url):
     if start != -1 and end != -1:
         return url[start:end]
     return None
+
+def scroll_here():
+    html_code = """
+                        <div id="scroll-target" style="margin-top: 1000px;"></div>
+                        <script>
+                          function scrollToTarget() {
+                            document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
+                          }
+                          window.onload = scrollToTarget;
+                        </script>
+                    """
+
+    components.html(html_code, height=0)
+

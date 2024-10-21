@@ -1,6 +1,3 @@
-import streamlit as st
-
-
 # speech_key = st.secrets["SPEECH_KEY"]
 # service_region = st.secrets["SERVICE_REGION"]
 #
