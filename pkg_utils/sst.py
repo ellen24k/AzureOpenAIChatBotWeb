@@ -1,6 +1,5 @@
 import streamlit as st
 import speech_recognition as sr
-import azure.cognitiveservices.speech as speechsdk
 
 # speech_key = st.secrets["SPEECH_KEY"]
 # service_region = st.secrets["SERVICE_REGION"]
