@@ -9,10 +9,11 @@ from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image
 from pkg_utils.sst import recognize_speech
 from pkg_utils.tts import synthesize_speech
-from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set
+from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set, live_2d
 
 
 def load_view():
+    live_2d()
     padding_set()
     img_url = None
     content = None

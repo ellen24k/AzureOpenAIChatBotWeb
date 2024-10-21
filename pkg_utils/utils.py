@@ -61,7 +61,6 @@ def autoplay_audio(file_path):
     """
     st.markdown(audio_html, unsafe_allow_html=True)
 
-
 def padding_set():
     css = """
     <style>
@@ -74,6 +73,49 @@ def padding_set():
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
+
+def live_2d():
+    html_code = """
+    <head>
+        <meta charset="UTF-8">
+        <title>live2d-demo</title>
+        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <!-- Live2DCubismCore -->
+        <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/frame/live2dcubismcore.min.js"></script>
+        <!-- Include Pixi. -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js"></script>
+        <!-- Include Cubism Components. -->
+        <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismframework.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismpixi.js"></script>
+        <!-- User's Script -->
+        <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/l2d.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/main.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="layered-content" style="position: fixed; top: 300px; left: 200px; z-index: 1000;">
+            <div class="Canvas"  id="L2dCanvas"></div>
+                <script>
+                    var config = {
+                        width: 400,
+                        height: 400,
+                        left: '0px',
+                        bottom: '0px',
+                        basePath: 'https://cdn.jsdelivr.net/gh/alg-wiki/AzurLaneL2DViewer@gh-pages/assets',
+                        role: 'bisimai_2',
+                        background: 'transparent',
+                        opacity: 1,
+                        mobile: true
+                    }
+                    var v = new Viewer(config); 
+            </script>
+        </div>
+    </body>
+    """
+
+    st.components.v1.html(html_code, height=400)
+
 
 
 def shorten_url(url):
