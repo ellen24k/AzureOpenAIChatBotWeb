@@ -1,4 +1,3 @@
-import speech_recognition as sr
 import streamlit as st
 
 
@@ -24,18 +23,20 @@ import streamlit as st
 #             print("Error details: {}".format(cancellation_details.error_details))
 #     return None
 
-def recognize_speech():
-    recognizer = sr.Recognizer()
-    with sr.Microphone() as source:
-        st.write("마이크가 작동중 입니다. 지금 말하세요.")
-        audio = recognizer.listen(source)
-    try:
-        text = recognizer.recognize_google(audio, language="ko-KR")
-        st.write(f"인식된 텍스트: {text}")
-        return text
-    except sr.UnknownValueError:
-        st.write("음성을 인식할 수 없습니다.")
-    except sr.RequestError as e:
-        st.write(f"음성 인식 서비스에 접근할 수 없습니다: {e}")
-    return None
+# def recognize_speech():
+#     recognizer = sr.Recognizer()
+#     with sr.Microphone() as source:
+#         st.write("마이크가 작동중 입니다. 지금 말하세요.")
+#         audio = recognizer.listen(source)
+#     try:
+#         text = recognizer.recognize_google(audio, language="ko-KR")
+#         st.write(f"인식된 텍스트: {text}")
+#         return text
+#     except sr.UnknownValueError:
+#         st.write("음성을 인식할 수 없습니다.")
+#     except sr.RequestError as e:
+#         st.write(f"음성 인식 서비스에 접근할 수 없습니다: {e}")
+#     return None
 
+def recognize_speech():
+    return None

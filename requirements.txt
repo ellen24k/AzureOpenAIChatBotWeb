@@ -6,6 +6,4 @@ streamlit_option_menu
 langchain_openai
 supabase
 pyshorteners
-SpeechRecognition
 azure-cognitiveservices-speech
-pyaudio
