@@ -29,7 +29,6 @@ def recognize_speech():
     with sr.Microphone() as source:
         st.write("마이크가 작동중 입니다. 지금 말하세요.")
         audio = recognizer.listen(source)
-
     try:
         text = recognizer.recognize_google(audio, language="ko-KR")
         st.write(f"인식된 텍스트: {text}")
