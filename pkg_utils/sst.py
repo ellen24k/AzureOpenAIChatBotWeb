@@ -1,4 +1,5 @@
 import streamlit as st
+import speech_recognition as sr
 import azure.cognitiveservices.speech as speechsdk
 
 # speech_key = st.secrets["SPEECH_KEY"]
@@ -24,9 +25,18 @@ import azure.cognitiveservices.speech as speechsdk
 #     return None
 
 def recognize_speech():
-    st.error('마이크 입력 기능은 현재 사용할 수 없습니다.')
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        st.write("마이크가 작동중 입니다. 지금 말하세요.")
+        audio = recognizer.listen(source)
+
+    try:
+        text = recognizer.recognize_google(audio, language="ko-KR")
+        st.write(f"인식된 텍스트: {text}")
+        return text
+    except sr.UnknownValueError:
+        st.write("음성을 인식할 수 없습니다.")
+    except sr.RequestError as e:
+        st.write(f"음성 인식 서비스에 접근할 수 없습니다: {e}")
     return None
-    # 마이크로 입력받아 텍스트로 리턴해주는 웹브라우저에서 작동하는 함수
-
-
 
