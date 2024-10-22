@@ -78,11 +78,11 @@ def load_view():
                 st.image(img_url, use_column_width=True, caption=f'{content}')
                 st.audio(wav_file_url, format='audio/wav', autoplay=True)
 
-                st.balloons()
-                scroll_here()
-
                 try:
                     os.remove('temp/' + file_name + '.png')
                     os.remove('temp/' + file_name + '.wav')
                 except Exception as e:
                     print(e)
+
+                st.balloons()
+                scroll_here()
