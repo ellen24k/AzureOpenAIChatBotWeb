@@ -78,7 +78,7 @@ def load_view():
                         if png_file_url is None:
                             png_file_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
                         if wav_file_url is None:
-                            wav_file_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_wav.png"
+                            wav_file_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_wav.wav"
                         break
 
                 insert_data(png_file_url, wav_file_url, user_input, content)
