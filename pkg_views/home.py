@@ -52,10 +52,11 @@ def load_view():
                 pbar.change_progress('오디오를 저장 중 입니다.', 70, 80)
                 wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
 
+
                 insert_data(png_file_url, wav_file_url, user_input, content)
 
-                st.title(user_input)
                 pbar.change_progress('결과를 출력 하는 중 입니다.', 80, 90)
+                st.title(user_input)
                 st.image(png_file_url, use_column_width=True, caption=f'{content}')
                 st.audio(wav_file_url, format='audio/wav', autoplay=True)
 
