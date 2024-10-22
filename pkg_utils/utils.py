@@ -1,7 +1,7 @@
 import shutil
 from datetime import datetime
 from urllib.parse import urlparse, parse_qs
-
+import subprocess
 import pyshorteners
 import requests
 import streamlit as st
@@ -100,3 +100,11 @@ def menu_hide():
     </style>
     """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+
+def get_git_version():
+    try:
+        version = subprocess.check_output(["git", "describe", "--tags"]).strip().decode('utf-8')
+    except subprocess.CalledProcessError:
+        version = "unknown"
+    return version

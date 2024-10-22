@@ -18,7 +18,6 @@ def on_image_generated(img_url, file_name, pbar, user_input, content):
     else:
         pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
 
-
     pbar.change_progress('이미지 파일을 저장 중 입니다.', 10)
     download_file(img_url, 'temp/' + file_name + '.png')
     png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
@@ -30,7 +29,7 @@ def on_image_generated(img_url, file_name, pbar, user_input, content):
 
 
 def gen_image_thread(content, file_name, pbar, user_input):
-    img_url = generate_image_sync(content,True)
+    img_url = generate_image_sync(content, True)
     return img_url
 
 
@@ -55,8 +54,8 @@ def load_view():
                 pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 10)
                 content = make_poem(user_input)
 
-
                 pbar.change_progress('이미지를 생성 중 입니다.', 10)
+
                 def run_gen_image():
                     nonlocal img_url, png_file_url
                     img_url = gen_image_thread(content, file_name, pbar, user_input)
@@ -66,7 +65,6 @@ def load_view():
 
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
-
 
                 pbar.change_progress('오디오를 생성 중 입니다.', 10)
                 synthesize_speech(content, filename='temp/' + file_name + '.wav', ssml=True)
