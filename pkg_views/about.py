@@ -10,5 +10,3 @@ def load_view():
     st.write('만든이 : 김태영')
     if st.button('프로그램 버전: 1.0.1'):
         st.image("resources/diagram.png", use_column_width=True)
-
-
