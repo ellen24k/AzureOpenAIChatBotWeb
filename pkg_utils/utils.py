@@ -56,6 +56,7 @@ def padding_set():
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
+    st.write('1')
 
 
 def shorten_url(url):

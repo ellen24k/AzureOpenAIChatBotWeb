@@ -89,5 +89,6 @@ def load_view():
                 except Exception as e:
                     print(e)
 
+
                 st.balloons()
                 scroll_here()
