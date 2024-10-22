@@ -23,6 +23,9 @@ def on_image_generated(img_url, file_name, pbar):
     png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
     pbar.change_progress('이미지 파일이 저장되었습니다.', 10)
 
+    st.title(user_input)
+    st.image(img_url, use_column_width=True, caption=f'{content}')
+
     return png_file_url
 
 
@@ -56,7 +59,7 @@ def load_view():
 
                 async def async_gen_image():
                     img_url = await generate_image_async(content, test=True)
-                    png_file_url = on_image_generated(img_url, file_name, pbar)
+                    png_file_url = on_image_generated(img_url, file_name, pbar, user_input, content)
 
                 asyncio.run(async_gen_image())
 
@@ -74,8 +77,6 @@ def load_view():
 
                 pbar.empty()
 
-                st.title(user_input)
-                st.image(img_url, use_column_width=True, caption=f'{content}')
                 st.audio(wav_file_url, format='audio/wav', autoplay=True)
 
                 try:
