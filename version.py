@@ -6,7 +6,7 @@ from datetime import datetime
 
 def create_version_file():
     # 버전 파일 경로 설정
-    version_file = "version_log.txt"
+    version_file = "version.txt"
 
     # 커밋 메시지 가져오기
     commit_message = sys.argv[1] if len(sys.argv) > 1 else "No commit message"
@@ -23,7 +23,7 @@ def create_version_file():
 
 def read_version_file():
     # 버전 파일 경로 설정
-    version_file = "version_log.txt"
+    version_file = "version.txt"
 
     # 버전 정보 읽기
     if os.path.exists(version_file):
