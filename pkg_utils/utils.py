@@ -8,6 +8,8 @@ import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
+from version import read_version_file
+
 
 def copy_file(source_file, destination_file):
     shutil.copy(source_file, destination_file)
@@ -57,7 +59,7 @@ def padding_set():
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
-    st.write('version : 1.0.0')
+    st.write(read_version_file())
 
 
 def shorten_url(url):
