@@ -57,7 +57,6 @@ def load_view():
                 st.title(user_input)
                 st.image(png_file_url, use_column_width=True, caption=f'{content}')
                 st.audio(wav_file_url, format='audio/wav', autoplay=True)
-                pbar.change_progress('결과를 출력 하는 중 입니다.', 80, 90)
 
                 pbar.change_progress('작업을 완료 하는 중 입니다.', 80, 100)
                 pbar.empty()
