@@ -101,10 +101,3 @@ def menu_hide():
     """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-
-def get_git_version():
-    try:
-        version = subprocess.check_output(["git", "describe", "--tags"]).strip().decode('utf-8')
-    except subprocess.CalledProcessError:
-        version = "unknown"
-    return version

@@ -1,6 +1,6 @@
 import streamlit as st
 
-from pkg_utils.utils import padding_set, get_git_version
+from pkg_utils.utils import padding_set
 
 
 def load_view():
@@ -9,4 +9,4 @@ def load_view():
     st.title('삼행시 갤러리 using Dall-e, Chat-GPT4o')
     # st.image("https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/diagram.png", use_column_width=True)
     st.write('만든이 : 김태영')
-    st.write(f'프로그램 버전: {get_git_version()}')
+    st.write(f'프로그램 버전: 1.0.0')
