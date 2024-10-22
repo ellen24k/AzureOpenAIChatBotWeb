@@ -10,5 +10,6 @@ def read_version_file():
         with open(version_file, "r") as f:
             content = f.read()
             print(content)
+            return content
     else:
         print("No version information found.")
