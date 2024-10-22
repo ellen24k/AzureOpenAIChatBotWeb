@@ -1,7 +1,6 @@
-import asyncio
 import json
 import random
-from concurrent.futures import ThreadPoolExecutor
+import time
 
 import streamlit as st
 from openai import AzureOpenAI
@@ -13,7 +12,12 @@ client = AzureOpenAI(
 )
 
 
-def generate_image_sync(prompt: str):
+def generate_image_sync(prompt, test=False):
+    if test:
+        img_url = None
+        time.sleep(random.randint(10,20))
+        return img_url
+
     prompt = prompt + "\nA vibrant painting in the style of a famous artist."
 
     try:
@@ -50,14 +54,14 @@ def generate_image_sync(prompt: str):
 #         print(f"Error generating image: {e}")
 #         return None
 
-
-async def generate_image_async(prompt: str, test=False):
-    if test:
-        img_url = None
-        await asyncio.sleep(random.randint(10, 20))
-        return img_url
-
-    loop = asyncio.get_event_loop()
-    with ThreadPoolExecutor() as pool:
-        image_url = await loop.run_in_executor(pool, generate_image_sync, prompt)
-    return image_url
+#
+# async def generate_image_async(prompt: str, test=False):
+#     if test:
+#         img_url = None
+#         await asyncio.sleep(random.randint(10, 20))
+#         return img_url
+#
+#     loop = asyncio.get_event_loop()
+#     with ThreadPoolExecutor() as pool:
+#         image_url = await loop.run_in_executor(pool, generate_image_sync, prompt)
+#     return image_url

@@ -1,13 +1,12 @@
-import asyncio
 import os
-from time import sleep
+import threading
 
 import streamlit as st
 
 from pkg_db.db import insert_data, file_upload
 from pkg_utils.ProgressBar import ProgressBar
 from pkg_utils.chat import make_poem
-from pkg_utils.dalle import generate_image_async
+from pkg_utils.dalle import generate_image_sync
 from pkg_utils.tts import synthesize_speech
 from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set, scroll_here
 
@@ -19,14 +18,20 @@ def on_image_generated(img_url, file_name, pbar, user_input, content):
     else:
         pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
 
+
+    pbar.change_progress('이미지 파일을 저장 중 입니다.', 10)
     download_file(img_url, 'temp/' + file_name + '.png')
     png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
-    pbar.change_progress('이미지 파일이 저장되었습니다.', 10)
 
     st.title(user_input)
     st.image(img_url, use_column_width=True, caption=f'{content}')
 
     return png_file_url
+
+
+def gen_image_thread(content, file_name, pbar, user_input):
+    img_url = generate_image_sync(content)
+    return img_url
 
 
 def load_view():
@@ -43,46 +48,38 @@ def load_view():
     else:
         if st.button('삼행시 만들기'):
             file_name = get_current_time_no_spaces()
-            pbar = ProgressBar('작업을 시작합니다.')
+            pbar = ProgressBar('')
             with pbar:
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/msg_wait.wav')
-                pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 5)
+                pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 10)
                 content = make_poem(user_input)
-                pbar.change_progress('삼행시가 생성되었습니다.', 10)
+
+
+                pbar.change_progress('이미지를 생성 중 입니다.', 10)
+                def run_gen_image():
+                    nonlocal img_url, png_file_url
+                    img_url = gen_image_thread(content, file_name, pbar, user_input)
+
+                thread_img = threading.Thread(target=run_gen_image)
+                thread_img.start()
 
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
 
-                pbar.change_progress('이미지를 생성 중 입니다.', 5)
 
-                async def async_gen_image():
-                    img_url = await generate_image_async(content)
-                    png_file_url = on_image_generated(img_url, file_name, pbar, user_input, content)
-                    return img_url, png_file_url
-
-                img_url, png_file_url = asyncio.run(async_gen_image())
-
-                pbar.change_progress('오디오를 생성 중 입니다.', 5)
+                pbar.change_progress('오디오를 생성 중 입니다.', 10)
                 synthesize_speech(content, filename='temp/' + file_name + '.wav', ssml=True)
-                pbar.change_progress('오디오 생성이 완료되었습니다.', 10)
+
+                pbar.change_progress('오디오 파일을 저장 중 입니다.', 10)
                 wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
-                pbar.change_progress('오디오 파일이 저장되었습니다.', 10)
 
-                limit = 10
-                while png_file_url is None or wav_file_url is None:
-                    print("w", img_url, png_file_url, wav_file_url)
-                    sleep(0.5)
-                    limit -= 1
-                    if limit == 0:
-                        if png_file_url is None:
-                            png_file_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
-                        if wav_file_url is None:
-                            wav_file_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_wav.wav"
-                        break
+                pbar.change_progress('이미지를 생성 작업을 마무리 중 입니다.', 10)
+                thread_img.join()
+                png_file_url = on_image_generated(img_url, file_name, pbar, user_input, content)
 
+                pbar.change_progress('작업한 내용을 데이타베이스에 저장 중 입니다.', 10)
                 insert_data(png_file_url, wav_file_url, user_input, content)
-                pbar.change_progress('데이타베이스에 자료가 저장되었습니다.', 10)
 
                 pbar.empty()
 
