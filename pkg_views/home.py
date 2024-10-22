@@ -61,7 +61,6 @@ def load_view():
                 pbar.change_progress('작업을 완료 하는 중 입니다.', 90, 100)
                 pbar.empty()
                 st.balloons()
-
                 scroll_here()
 
                 try:
