@@ -18,6 +18,7 @@ class ProgressBar:
         self.text = text
         self.current_progress += plus_percent
         self.progress.progress(self.current_progress, text='[' + str(self.current_progress) + '%] ' + self.text)
+        sleep(0.1)
 
     def empty(self):
         self.progress.progress(

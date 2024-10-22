@@ -1,5 +1,6 @@
 import asyncio
 import json
+import random
 
 import streamlit as st
 from openai import AzureOpenAI
@@ -29,8 +30,8 @@ def generate_image(prompt: str):
 
 async def generate_image_async(prompt: str,test=False):
     if test:
-        img_url = 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png'
-        await asyncio.sleep(15)
+        img_url = None
+        await asyncio.sleep(random.randint(10,20))
         return img_url
 
     prompt = prompt + "\nA vibrant painting in the style of a famous artist."

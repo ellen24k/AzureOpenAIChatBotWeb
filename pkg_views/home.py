@@ -47,32 +47,39 @@ def load_view():
             with pbar:
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/msg_wait.wav')
-                pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 10)
+                pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 5)
                 content = make_poem(user_input)
                 pbar.change_progress('삼행시가 생성되었습니다.', 10)
-                # sleep(3)
 
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
 
-                pbar.change_progress('이미지를 생성 중 입니다.', 10)
+                pbar.change_progress('이미지를 생성 중 입니다.', 5)
 
                 async def async_gen_image():
                     img_url = await generate_image_async(content, test=True)
                     png_file_url = on_image_generated(img_url, file_name, pbar, user_input, content)
+                    return img_url, png_file_url
 
-                asyncio.run(async_gen_image())
+                img_url, png_file_url = asyncio.run(async_gen_image())
 
-                pbar.change_progress('오디오를 생성 중 입니다.', 10)
+                pbar.change_progress('오디오를 생성 중 입니다.', 5)
                 synthesize_speech(content, filename='temp/' + file_name + '.wav', ssml=True)
                 pbar.change_progress('오디오 생성이 완료되었습니다.', 10)
                 wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
                 pbar.change_progress('오디오 파일이 저장되었습니다.', 10)
 
-                print(img_url, png_file_url, wav_file_url)
-                # while img_url is None or png_file_url is None or wav_file_url is None:
-                #     print("w",img_url, png_file_url, wav_file_url)
-                #     sleep(0.5)
+                limit = 10
+                while png_file_url is None or wav_file_url is None:
+                    print("w", img_url, png_file_url, wav_file_url)
+                    sleep(0.5)
+                    limit -= 1
+                    if limit == 0:
+                        if png_file_url is None:
+                            png_file_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
+                        if wav_file_url is None:
+                            wav_file_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_wav.png"
+                        break
 
                 insert_data(png_file_url, wav_file_url, user_input, content)
                 pbar.change_progress('데이타베이스에 자료가 저장되었습니다.', 10)
