@@ -29,7 +29,7 @@ def on_image_generated(img_url, file_name, pbar, user_input, content):
 
 
 def gen_image_thread(content, file_name, pbar, user_input):
-    img_url = generate_image_sync(content, True)
+    img_url = generate_image_sync(content, False)
     return img_url
 
 
@@ -72,7 +72,7 @@ def load_view():
                 pbar.change_progress('오디오 파일을 저장 중 입니다.', 10)
                 wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
 
-                pbar.change_progress('이미지를 생성 작업을 마무리 중 입니다.', 20)
+                pbar.change_progress('이미지 생성 작업을 마무리 중 입니다.', 20)
                 thread_img.join()
                 png_file_url = on_image_generated(img_url, file_name, pbar, user_input, content)
 
