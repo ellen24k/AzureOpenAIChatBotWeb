@@ -57,7 +57,7 @@ def load_view():
                 pbar.change_progress('이미지를 생성 중 입니다.', 5)
 
                 async def async_gen_image():
-                    img_url = await generate_image_async(content, test=True)
+                    img_url = await generate_image_async(content)
                     png_file_url = on_image_generated(img_url, file_name, pbar, user_input, content)
                     return img_url, png_file_url
 
