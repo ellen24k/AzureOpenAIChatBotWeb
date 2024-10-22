@@ -12,7 +12,7 @@ from pkg_utils.tts import synthesize_speech
 from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set, scroll_here
 
 
-def on_image_generated(img_url, file_name, pbar):
+def on_image_generated(img_url, file_name, pbar, user_input, content):
     if not img_url:
         img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
         pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 10)
@@ -69,8 +69,10 @@ def load_view():
                 wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
                 pbar.change_progress('오디오 파일이 저장되었습니다.', 10)
 
-                while img_url is None or png_file_url is None or wav_file_url is None:
-                    sleep(0.5)
+                print(img_url, png_file_url, wav_file_url)
+                # while img_url is None or png_file_url is None or wav_file_url is None:
+                #     print("w",img_url, png_file_url, wav_file_url)
+                #     sleep(0.5)
 
                 insert_data(png_file_url, wav_file_url, user_input, content)
                 pbar.change_progress('데이타베이스에 자료가 저장되었습니다.', 10)

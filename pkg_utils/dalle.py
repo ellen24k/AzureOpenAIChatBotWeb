@@ -30,7 +30,7 @@ def generate_image(prompt: str):
 async def generate_image_async(prompt: str,test=False):
     if test:
         img_url = 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png'
-        await asyncio.sleep(10)
+        await asyncio.sleep(15)
         return img_url
 
     prompt = prompt + "\nA vibrant painting in the style of a famous artist."

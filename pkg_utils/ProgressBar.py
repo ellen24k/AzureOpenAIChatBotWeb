@@ -1,22 +1,23 @@
 from time import sleep
+
 import streamlit as st
 
 class ProgressBar:
     def __init__(self, text):
         self.text = text
+        self.current_progress = 0
 
     def __enter__(self):
-        self.progress = st.progress(0, text=self.text)
-        return self.progress
+        self.progress = st.progress(self.current_progress, text=self.text)
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.progress.empty()
 
     def change_progress(self, text, plus_percent):
         self.text = text
-        current_progress = self.progress.progress
-        new_progress = current_progress + plus_percent
-        self.progress.progress(new_progress, text='[' + str(new_progress) + '%] ' + self.text)
+        self.current_progress += plus_percent
+        self.progress.progress(self.current_progress, text='[' + str(self.current_progress) + '%] ' + self.text)
 
     def empty(self):
         self.progress.progress(
