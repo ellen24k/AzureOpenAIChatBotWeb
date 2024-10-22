@@ -12,12 +12,17 @@ class ProgressBar:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.progress.empty()
 
-    def change_progress(self, text, from_percent, to_percent):
+    def change_progress(self, text, plus_percent):
         self.text = text
-        for percent_complete in range(from_percent, to_percent):
-            sleep(0.05)
-            self.progress.progress(percent_complete + 1, text='[' + str(percent_complete + 1) + '%] ' + self.text)
-        sleep(0.5)
+        self.progress.progress(
+            self.progress.progress + plus_percent,
+            text='[' + str(self.progress.progress + plus_percent) + '%] ' + self.text
+        )
 
     def empty(self):
+        self.progress.progress(
+            100,
+            '[100%] 작업이 완료 되었습니다.',
+        )
+        sleep(0.5)
         self.progress.empty()
