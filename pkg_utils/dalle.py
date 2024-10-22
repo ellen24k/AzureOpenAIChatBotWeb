@@ -15,7 +15,7 @@ client = AzureOpenAI(
 def generate_image_sync(prompt, test=False):
     if test:
         img_url = None
-        time.sleep(random.randint(10,15))
+        time.sleep(random.randint(10, 15))
         return img_url
 
     prompt = prompt + "\nA vibrant painting in the style of a famous artist."

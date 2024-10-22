@@ -29,7 +29,7 @@ def on_image_generated(img_url, file_name, pbar, user_input, content):
 
 
 def gen_image_thread(content, file_name, pbar, user_input):
-    img_url = generate_image_sync(content, False)
+    img_url = generate_image_sync(content, True)
     return img_url
 
 

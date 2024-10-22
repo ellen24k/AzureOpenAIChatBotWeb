@@ -4,7 +4,6 @@ from pkg_utils.utils import padding_set, shorten_url, url_to_qr_code
 
 
 def login_page():
-    st.session_state['mic_input'] = ''
     padding_set()
     st.title('삼행시 갤러리')
     password = st.text_input('입장코드를 입력하세요.')
