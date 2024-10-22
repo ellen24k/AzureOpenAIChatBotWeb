@@ -54,14 +54,15 @@ def load_view():
                 insert_data(png_file_url, wav_file_url, user_input, content)
 
                 st.title(user_input)
-                pbar.change_progress('결과를 출력 하는 중 입니다.', 80, 90)
                 st.image(png_file_url, use_column_width=True, caption=f'{content}')
                 st.audio(wav_file_url, format='audio/wav', autoplay=True)
+                pbar.change_progress('결과를 출력 하는 중 입니다.', 80, 90)
 
                 pbar.change_progress('작업을 완료 하는 중 입니다.', 90, 100)
                 pbar.empty()
-                st.balloons()
+
                 scroll_here()
+                st.balloons()
 
                 try:
                     os.remove('temp/' + file_name + '.png')
