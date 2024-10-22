@@ -1,7 +1,8 @@
 import shutil
+import subprocess
 from datetime import datetime
 from urllib.parse import urlparse, parse_qs
-import subprocess
+
 import pyshorteners
 import requests
 import streamlit as st
@@ -56,7 +57,7 @@ def padding_set():
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
-    st.write('1')
+    st.write('version : 1.0.0')
 
 
 def shorten_url(url):
@@ -91,6 +92,7 @@ def scroll_here():
 
     components.html(html_code, height=0)
 
+
 def menu_hide():
     # .stAppToolbar {visibility: hidden;}
     hide_streamlit_style = """
@@ -101,4 +103,3 @@ def menu_hide():
     </style>
     """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
