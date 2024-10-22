@@ -14,10 +14,9 @@ class ProgressBar:
 
     def change_progress(self, text, plus_percent):
         self.text = text
-        self.progress.progress(
-            self.progress.progress + plus_percent,
-            text='[' + str(self.progress.progress + plus_percent) + '%] ' + self.text
-        )
+        current_progress = self.progress.progress
+        new_progress = current_progress + plus_percent
+        self.progress.progress(new_progress, text='[' + str(new_progress) + '%] ' + self.text)
 
     def empty(self):
         self.progress.progress(
