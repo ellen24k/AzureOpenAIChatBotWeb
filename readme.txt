@@ -18,7 +18,8 @@ new_version=$(IFS='.'; echo "${version_parts[*]}")
 
 # 새로운 버전 값을 version.txt 파일에 저장
 echo "$new_version" > version.txt
-
+git add version.txt
+git commit -m "Update version number"
 --
 ## git bash terminal
 chmod +x post-commit
