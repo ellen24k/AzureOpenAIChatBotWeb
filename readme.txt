@@ -1,5 +1,5 @@
 ## git bash terminal
-## .git/hooks/pre-commit 파일 생성
+## .git/hooks/post-commit 파일 생성
 --
 #!/bin/bash
 
