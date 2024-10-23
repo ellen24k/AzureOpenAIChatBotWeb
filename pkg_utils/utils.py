@@ -101,3 +101,8 @@ def menu_hide():
     </style>
     """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+def read_version(file_path='version.txt'):
+    with open(file_path, 'r') as file:
+        version = file.read().strip()
+    return version
