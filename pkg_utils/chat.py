@@ -10,8 +10,10 @@ def make_poem(user_input):
     )
     messages = [
         {"role": "system", "content": "You're a poet with a lot of sensibility."},
+        {"role": "system", "content": "The output format must be ['letter': content, 'letter': content, 'letter': content.]"},
+        {"role": "system", "content": "Do not generate any response message other than the output format."},
         {"role": "user",
-         "content": "'" + user_input + "의 3글자로 3행시 만들어. 형식은 반드시 ['글자': 내용, '글자': 내용, '글자': 내용.] 으로 작성해"},
+         "content": "'" + user_input + "의 3글자로 3행시 만들어."},
     ]
     # {"role": "system", "content": "You're a gang boss with scary charisma."},
     result = chat_model.invoke(input=messages)
