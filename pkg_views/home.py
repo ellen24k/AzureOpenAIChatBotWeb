@@ -11,6 +11,11 @@ from pkg_utils.tts import synthesize_speech
 from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set, scroll_here
 
 
+def gen_image_thread(content, file_name, pbar, user_input):
+    img_url = generate_image_sync(content, False)
+    return img_url
+
+
 def on_image_generated(img_url, file_name, pbar, user_input, content):
     if not img_url:
         img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
@@ -26,11 +31,6 @@ def on_image_generated(img_url, file_name, pbar, user_input, content):
     st.image(img_url, use_column_width=True, caption=f'{content}')
 
     return png_file_url
-
-
-def gen_image_thread(content, file_name, pbar, user_input):
-    img_url = generate_image_sync(content, True)
-    return img_url
 
 
 def load_view():
