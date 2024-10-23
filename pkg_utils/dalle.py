@@ -6,9 +6,9 @@ import streamlit as st
 from openai import AzureOpenAI
 
 client = AzureOpenAI(
-    api_version=st.secrets["OPENAI_API_VERSION_EASTUS"],
-    azure_endpoint=st.secrets["AZURE_OPENAI_ENDPOINT_EASTUS"],
     api_key=st.secrets["AZURE_OPENAI_API_KEY_EASTUS"],
+    api_version=st.secrets["AZURE_OPENAI_API_VERSION_EASTUS_DALLE3"],
+    azure_endpoint=st.secrets["AZURE_OPENAI_ENDPOINT_EASTUS_DALLE3"],
 )
 
 
@@ -18,11 +18,11 @@ def generate_image_sync(prompt, test=False):
         time.sleep(random.randint(10, 15))
         return img_url
 
-    prompt = prompt + "\nA vibrant painting in the style of a famous artist."
+    prompt = prompt + "\nA vibrant painting in the style of a famous artist. First, make a beautiful picture frame on the border and draw it in it."
 
     try:
         result = client.images.generate(
-            model="Dalle3",
+            model="dall-e-3",
             prompt=prompt,
             n=1,
         )
