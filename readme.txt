@@ -1,6 +1,6 @@
 ## git bash terminal
-
-## .git/hooks/post-commit 파일 생성
+## .git/hooks/pre-commit 파일 생성
+--
 #!/bin/bash
 
 # version.txt 파일에서 현재 버전 값을 읽음
@@ -19,6 +19,7 @@ new_version=$(IFS='.'; echo "${version_parts[*]}")
 # 새로운 버전 값을 version.txt 파일에 저장
 echo "$new_version" > version.txt
 
+--
 ## git bash terminal
 chmod +x post-commit
 --
