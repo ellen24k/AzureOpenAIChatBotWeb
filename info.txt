@@ -28,7 +28,7 @@ chmod +x post-commit
 npm install supabase --save-dev
 npx supabase init # intellij settings에서 y
 npx supabase functions new download_file
-set SUPABASE_ACCESS_TOKEN=key값 이메일로 받은거
+run_supabase (내용 set SUPABASE_ACCESS_TOKEN=key값 이메일로 받은거 접속키)
 npx supabase functions deploy download_file
 #invoke
-curl -L -X POST 'https://uzefbkvgsuzmopxjxymz.supabase.co/functions/v1/hello-world' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6ZWZia3Znc3V6bW9weGp4eW16Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkxNTI5NzQsImV4cCI6MjA0NDcyODk3NH0.Q5eiJ32eZa-cALCVxbUlX9sApoOIlzG6a9iZ3hzcXr4' --data '{"name":"Functions"}'
+curl -L -X POST 'https://uzefbkvgsuzmopxjxymz.supabase.co/functions/v1/hello-world' -H 'Authorization: Bearer xxx' --data '{"name":"Functions"}'

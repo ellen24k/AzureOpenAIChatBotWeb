@@ -69,6 +69,7 @@ def file_delete(bucket_name: str, file_name: str) -> str:
 
 def supabase_function_invoke(img_url, file_name):
     supabase_storage_base_url = 'https://uzefbkvgsuzmopxjxymz.supabase.co/storage/v1/object/public/ChatBotFiles/'
+    default_img_url = 'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default.png'
 
     try:
         response = supabase.functions.invoke(
@@ -85,15 +86,15 @@ def supabase_function_invoke(img_url, file_name):
                 },
             },
         )
-        print(response)
+        print("---------------------" + response)
         ret_url = supabase_storage_base_url + file_name
         return ret_url
     except APIError as e:
         print(f"Error invoking function: {e.message}")
-        return None
+        return default_img_url
     except Exception as e:
         print(f"An unexpected error occurred: {str(e)}")
-        return None
+        return default_img_url
 
 
 # def supabase_function_invoke_request(img_url,file_name):
