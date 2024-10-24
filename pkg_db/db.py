@@ -89,9 +89,11 @@ def supabase_function_invoke(img_url, file_name):
         ret_url = supabase_storage_base_url + file_name
         return ret_url
     except APIError as e:
-        return f"Error invoking function: {e.message}"
+        print(f"Error invoking function: {e.message}")
+        return None
     except Exception as e:
-        return f"An unexpected error occurred: {str(e)}"
+        print(f"An unexpected error occurred: {str(e)}")
+        return None
 
 
 # def supabase_function_invoke_request(img_url,file_name):

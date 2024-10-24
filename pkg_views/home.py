@@ -16,9 +16,9 @@ def gen_image_thread(content, file_name, pbar, user_input):
     return img_url
 
 
-def on_image_generated(dalle_img_url, file_name, pbar):
-    if not dalle_img_url:
-        dalle_img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
+def on_image_generated(img_url, file_name, pbar):
+    if not img_url:
+        img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
         pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 10)
     else:
         pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
@@ -27,8 +27,8 @@ def on_image_generated(dalle_img_url, file_name, pbar):
     # download_file(dalle_img_url, 'temp/' + file_name + '.png')
     # supabase_img_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
     supabase_img_url = supabase_function_invoke(
-        dalle_img_url,
-        file_name
+        img_url,
+        file_name + '.png'
     )
 
     return supabase_img_url
@@ -82,13 +82,13 @@ def load_view():
 
                 supabase_img_url = on_image_generated(dalle_img_url, file_name, pbar)
 
-                pbar.change_progress('작업한 내용을 데이타베이스에 저장 중 입니다.', 10)
+                pbar.change_progress('갤러리에 추가 하는 중 입니다.', 10)
                 insert_data(supabase_img_url, wav_file_url, user_input, content)
 
                 pbar.empty()
 
                 try:
-                    os.remove('temp/' + file_name + '.png')
+                    #os.remove('temp/' + file_name + '.png')
                     os.remove('temp/' + file_name + '.wav')
                 except Exception as e:
                     print(e)

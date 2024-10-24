@@ -7,6 +7,7 @@ class ProgressBar:
     def __init__(self, text):
         self.text = text
         self.current_progress = 0
+        self.lock = threading.Lock()
 
     def __enter__(self):
         self.progress = st.progress(self.current_progress, text=self.text)
@@ -16,12 +17,13 @@ class ProgressBar:
         self.progress.empty()
 
     def change_progress(self, text, plus_percent):
-        self.text = text
-        to_percent = self.current_progress + plus_percent
-        while self.current_progress < to_percent:
-            self.current_progress += 1
-            self.progress.progress(self.current_progress, text='[' + str(self.current_progress) + '%] ' + self.text)
-            sleep(0.1)
+        with self.lock:
+            self.text = text
+            to_percent = self.current_progress + plus_percent
+            while self.current_progress < to_percent:
+                self.current_progress += 1
+                self.progress.progress(self.current_progress, text='[' + str(self.current_progress) + '%] ' + self.text)
+                sleep(0.05)
 
     def empty(self):
         self.progress.progress(
