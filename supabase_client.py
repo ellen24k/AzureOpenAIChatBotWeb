@@ -25,3 +25,5 @@ with open('result.txt', 'w') as file:
 if FUNCTIONS_BEARER_TOKEN:
     with open('result.txt', 'a') as file:
         file.write(f"FUNCTIONS_BEARER_TOKEN 값이 존재합니다: {FUNCTIONS_BEARER_TOKEN}\n")
+
+

@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-from pkg_views import home, gallery, admin, about
+from pkg_views import chatbot, gallery, admin, about
 
 
 def menu_page():
@@ -30,7 +30,7 @@ def menu_page():
             st.session_state['admin'] = False
 
         if selected_option == "ChatBot":
-            home.load_view()
+            chatbot.load_view()
         elif selected_option == "Gallery":
             gallery.load_view()
         elif selected_option == "Admin":
@@ -38,6 +38,6 @@ def menu_page():
         elif selected_option == "About":
             about.load_view()
         elif selected_option is None:
-            home.load_view()
+            chatbot.load_view()
 
     navigation()
