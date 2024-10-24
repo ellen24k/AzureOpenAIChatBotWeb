@@ -78,13 +78,12 @@ def load_view():
 
                 st.title(user_input)
                 st.image(dalle_img_url, use_column_width=True, caption=f'{content}')
-                st.audio(wav_file_url, format='audio/wav', autoplay=True)
 
+                pbar.change_progress('작업한 내용을 데이터베이스에 저장 중 입니다.', 10)
                 supabase_img_url = on_image_generated(dalle_img_url, file_name, pbar)
-
-                pbar.change_progress('갤러리에 추가 하는 중 입니다.', 10)
                 insert_data(supabase_img_url, wav_file_url, user_input, content)
 
+                st.audio(wav_file_url, format='audio/wav', autoplay=True)
                 pbar.empty()
 
                 try:
