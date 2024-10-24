@@ -12,37 +12,29 @@ from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download
 
 
 def gen_image_thread(content, file_name, pbar, user_input):
-    img_url = generate_image_sync(content, False)
+    img_url = generate_image_sync(content, True)
     return img_url
-
-
-def on_image_generated(dalle_img_url, file_name, pbar):
-    if not dalle_img_url:
-        dalle_img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
-        pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 10)
-    else:
-        pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
-
-    pbar.change_progress('이미지 파일을 저장 중 입니다.', 10)
-    download_file(dalle_img_url, 'temp/' + file_name + '.png')
-    png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
-
-    return png_file_url
-
 
 def load_view():
     padding_set()
     dalle_img_url = None
     content = None
-    png_file_url = None
-    wav_file_url = None
 
-    user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**')
+    user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**', max_chars=3)
+    #버튼 여러번 처리, 다시 누르면 처리
+    if 'running' not in st.session_state:
+        st.session_state['running'] = False
 
     if len(user_input) != 3:
         st.error('세글자를 입력해주세요.')
     else:
         if st.button('삼행시 만들기'):
+            if st.session_state['running']:
+                st.error('생성 중에 버튼을 다시 누르면 안됩니다.')
+                st.session_state['running'] = False
+                return
+
+            st.session_state['running'] = True
             file_name = get_current_time_no_spaces()
             pbar = ProgressBar('')
             with pbar:
@@ -72,7 +64,17 @@ def load_view():
 
                 pbar.change_progress('이미지 생성 작업을 마무리 중 입니다.', 10)
                 thread_img.join()
-                png_file_url = on_image_generated(dalle_img_url, file_name, pbar)
+
+                #png_file_url 대신 dalle_img_url 을 st.image로 사용하게 되면서 에러 처리 위치를 옮김.
+                if not dalle_img_url:
+                    dalle_img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
+                    pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 10)
+                else:
+                    pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
+
+                pbar.change_progress('이미지 파일을 저장 중 입니다.', 10)
+                download_file(dalle_img_url, 'temp/' + file_name + '.png')
+                png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
 
                 st.title(user_input)
                 st.image(dalle_img_url, use_column_width=True, caption=f'{content}')
@@ -83,11 +85,13 @@ def load_view():
 
                 pbar.empty()
 
+                st.balloons()
+                scroll_here()
+                st.session_state['running'] = False
+
                 try:
                     os.remove('temp/' + file_name + '.png')
                     os.remove('temp/' + file_name + '.wav')
                 except Exception as e:
                     print(e)
 
-                st.balloons()
-                scroll_here()
