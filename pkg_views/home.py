@@ -3,7 +3,7 @@ import threading
 
 import streamlit as st
 
-from pkg_db.db import insert_data, file_upload, supabase_function_invoke
+from pkg_db.db import insert_data, file_upload
 from pkg_utils.ProgressBar import ProgressBar
 from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image_sync
@@ -73,14 +73,14 @@ def load_view():
                 thread_img.join()
                 png_file_url = on_image_generated(dalle_img_url, file_name, pbar)
 
+                st.title(user_input)
+                st.image(dalle_img_url, use_column_width=True, caption=f'{content}')
+                st.audio(wav_file_url, format='audio/wav', autoplay=True)
+
                 pbar.change_progress('작업한 내용을 데이타베이스에 저장 중 입니다.', 10)
                 insert_data(png_file_url, wav_file_url, user_input, content)
 
                 pbar.empty()
-
-                st.title(user_input)
-                st.image(dalle_img_url, use_column_width=True, caption=f'{content}')
-                st.audio(wav_file_url, format='audio/wav', autoplay=True)
 
                 try:
                     os.remove('temp/' + file_name + '.png')
