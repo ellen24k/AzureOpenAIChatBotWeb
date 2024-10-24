@@ -28,3 +28,4 @@ jobs:
             else 
               print('Bye, Action!')
           "
+          python3 queue.py
