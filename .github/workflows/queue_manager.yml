@@ -23,38 +23,5 @@ jobs:
       - name: Fetch data and call function
         run: |
           python -c "
-          import requests
-          import pandas as pd
-          from supabase import create_client, Client
-          from supabase.exceptions import APIError
-          import os
-
-          # Supabase URL과 키 설정
-          url = 'https://uzefbkvgsuzmopxjxymz.supabase.co'
-          key = os.environ['SUPABASE_ANON_KEY']  # 환경 변수로 Supabase Anon Key 사용
-          supabase: Client = create_client(url, key)
-
-          def fetch_all_data():
-              try:
-                  response = supabase.table('data').select('*').order('date', desc=True).execute()
-                  data = response.data
-                  return pd.DataFrame(data)
-              except APIError as e:
-                  print(f'Error fetching data: {e.message}')
-                  return pd.DataFrame()
-
-          # 데이터 가져오기
-          df = fetch_all_data()
-
-          # URL 필드값 체크
-          for index, row in df.iterrows():
-              url_field = row.get('url')
-              if url_field and not url_field.startswith('https://uzefbkvgsuzmopxjxymz.supabase.co/'):
-                  # CURL 요청 보내기
-                  response = requests.post(
-                      'https://uzefbkvgsuzmopxjxymz.supabase.co/functions/v1/hello-world',
-                      headers={'Authorization': 'Bearer ' + os.environ['FUNCTIONS_BEARER_TOKEN']},  # 환경 변수로 Bearer Token 사용
-                      json={'name': 'Functions'}
-                  )
-                  print(f'Called function for {url_field}: {response.status_code}, {response.text}' if response.ok else f'Error calling function: {response.text')
+            print('Hello, Action!')
           "
