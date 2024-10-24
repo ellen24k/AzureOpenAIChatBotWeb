@@ -23,5 +23,8 @@ jobs:
       - name: Fetch data and call function
         run: |
           python -c "
-            print('Hello, Action!')
+            if os.environ['FUNCTIONS_BEARER_TOKEN']:
+              print('Hello, Action!')
+            else 
+              print('Bye, Action!')
           "
