@@ -83,3 +83,4 @@ temp/output.wav
 backup_examples/kli.wav
 /.streamlit/secrets.toml
 run_supabase.bat
+version.txt

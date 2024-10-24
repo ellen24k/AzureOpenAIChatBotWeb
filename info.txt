@@ -19,7 +19,7 @@ new_version=$(IFS='.'; echo "${version_parts[*]}")
 # 새로운 버전 값을 version.txt 파일에 저장하고 추가
 echo "$new_version" > version.txt
 git add version.txt
-
+# 참고로 version.txt 파일은 gitignore에 추가되어 있어서 fetch 되지 않음
 --
 ## git bash terminal
 chmod +x post-commit
