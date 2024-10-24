@@ -22,4 +22,4 @@ jobs:
 
       - name: Fetch data and call function
         run: |
-          python3 queue.py
+          python3 queue.py 
