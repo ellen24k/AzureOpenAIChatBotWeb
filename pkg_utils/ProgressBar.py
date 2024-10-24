@@ -21,7 +21,7 @@ class ProgressBar:
         while self.current_progress < to_percent:
             self.current_progress += 1
             self.progress.progress(self.current_progress, text='[' + str(self.current_progress) + '%] ' + self.text)
-            sleep(0.01)
+            sleep(0.1)
 
     def empty(self):
         self.progress.progress(

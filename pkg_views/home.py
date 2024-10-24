@@ -3,12 +3,12 @@ import threading
 
 import streamlit as st
 
-from pkg_db.db import insert_data, file_upload
+from pkg_db.db import insert_data, file_upload, supabase_function_invoke
 from pkg_utils.ProgressBar import ProgressBar
 from pkg_utils.chat import make_poem
 from pkg_utils.dalle import generate_image_sync
 from pkg_utils.tts import synthesize_speech
-from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, download_file, padding_set, scroll_here
+from pkg_utils.utils import autoplay_audio, get_current_time_no_spaces, padding_set, scroll_here
 
 
 def gen_image_thread(content, file_name, pbar, user_input):
@@ -16,28 +16,29 @@ def gen_image_thread(content, file_name, pbar, user_input):
     return img_url
 
 
-def on_image_generated(img_url, file_name, pbar, user_input, content):
-    if not img_url:
-        img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
+def on_image_generated(dalle_img_url, file_name, pbar):
+    if not dalle_img_url:
+        dalle_img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
         pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 10)
     else:
         pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
 
     pbar.change_progress('이미지 파일을 저장 중 입니다.', 10)
-    download_file(img_url, 'temp/' + file_name + '.png')
-    png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
+    # download_file(dalle_img_url, 'temp/' + file_name + '.png')
+    # supabase_img_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
+    supabase_img_url = supabase_function_invoke(
+        dalle_img_url,
+        file_name
+    )
 
-    st.title(user_input)
-    st.image(img_url, use_column_width=True, caption=f'{content}')
-
-    return png_file_url
+    return supabase_img_url
 
 
 def load_view():
     padding_set()
-    img_url = None
+    dalle_img_url = None
     content = None
-    png_file_url = None
+    supabase_img_url = None
     wav_file_url = None
 
     user_input = st.text_input('**삼행시를 만들 세글자를 입력하세요.**')
@@ -57,8 +58,8 @@ def load_view():
                 pbar.change_progress('이미지를 생성 중 입니다.', 10)
 
                 def run_gen_image():
-                    nonlocal img_url, png_file_url
-                    img_url = gen_image_thread(content, file_name, pbar, user_input)
+                    nonlocal dalle_img_url, supabase_img_url
+                    dalle_img_url = gen_image_thread(content, file_name, pbar, user_input)
 
                 thread_img = threading.Thread(target=run_gen_image)
                 thread_img.start()
@@ -74,14 +75,17 @@ def load_view():
 
                 pbar.change_progress('이미지 생성 작업을 마무리 중 입니다.', 20)
                 thread_img.join()
-                png_file_url = on_image_generated(img_url, file_name, pbar, user_input, content)
+
+                st.title(user_input)
+                st.image(dalle_img_url, use_column_width=True, caption=f'{content}')
+                st.audio(wav_file_url, format='audio/wav', autoplay=True)
+
+                supabase_img_url = on_image_generated(dalle_img_url, file_name, pbar)
 
                 pbar.change_progress('작업한 내용을 데이타베이스에 저장 중 입니다.', 10)
-                insert_data(png_file_url, wav_file_url, user_input, content)
+                insert_data(supabase_img_url, wav_file_url, user_input, content)
 
                 pbar.empty()
-
-                st.audio(wav_file_url, format='audio/wav', autoplay=True)
 
                 try:
                     os.remove('temp/' + file_name + '.png')

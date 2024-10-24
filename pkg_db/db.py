@@ -1,10 +1,13 @@
-from supabase import create_client, Client
 import pandas as pd
+import requests
 import streamlit as st
 from postgrest import APIError
+from supabase import create_client, Client
 
 supabase_url = st.secrets["SUPABASE_URL"]
 supabase_key = st.secrets["SUPABASE_KEY"]
+bucket_name = st.secrets["BUCKET_NAME"]
+
 supabase: Client = create_client(supabase_url, supabase_key)
 
 
@@ -62,3 +65,58 @@ def file_delete(bucket_name: str, file_name: str) -> str:
         return f"Error deleting file: {e.message}"
     except Exception as e:
         return f"An unexpected error occurred: {str(e)}"
+
+
+def supabase_function_invoke(img_url, file_name):
+    supabase_storage_base_url = 'https://uzefbkvgsuzmopxjxymz.supabase.co/storage/v1/object/public/ChatBotFiles/'
+
+    try:
+        response = supabase.functions.invoke(
+            "download_file",
+            invoke_options={
+                "body": {
+                    "bucket_name": bucket_name,
+                    "name": "Functions",
+                    "img_url": img_url,
+                    "file_name": file_name
+                },
+                "headers": {
+                    f'Authorization': f'Bearer {supabase_key}'
+                },
+            },
+        )
+        print(response)
+        ret_url = supabase_storage_base_url + file_name
+        return ret_url
+    except APIError as e:
+        return f"Error invoking function: {e.message}"
+    except Exception as e:
+        return f"An unexpected error occurred: {str(e)}"
+
+
+# def supabase_function_invoke_request(img_url,file_name):
+
+#     url = 'https://uzefbkvgsuzmopxjxymz.supabase.co/functions/v1/download_file'
+#
+#     headers = {
+#         'Authorization': f'Bearer {supabase_key}'
+#     }
+#     data = {
+#         'bucket_name': bucket_name,
+#         'name': 'Functions',
+#         'img_url': img_url,
+#         'file_name': file_name
+#     }
+#     # 요청과 응답 로그 추가
+#
+#     response = requests.post(url, headers=headers, json=data)
+#     print(f"Request URL: {url}")
+#     print(f"Request Headers: {headers}")
+#     print(f"Request Data: {data}")
+#     print(f"Status Code: {response.status_code}")
+#     print(f"Response: {response.json()}")
+#
+#     if response.status_code != 200:
+#         st.error(f"Error invoking function: {response.json().get('message', 'Unknown error')}")
+#     else:
+#         return response.json()
