@@ -2,6 +2,7 @@ import os
 import threading
 
 import streamlit as st
+from streamlit.connections.util import running_in_sis
 
 from pkg_db.db import insert_data, file_upload
 from pkg_utils.ProgressBar import ProgressBar
