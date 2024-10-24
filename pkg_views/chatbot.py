@@ -15,21 +15,6 @@ def gen_image_thread(content, file_name, pbar, user_input):
     img_url = generate_image_sync(content, False)
     return img_url
 
-
-def on_image_generated(dalle_img_url, file_name, pbar):
-    if not dalle_img_url:
-        dalle_img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
-        pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 10)
-    else:
-        pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
-
-    pbar.change_progress('이미지 파일을 저장 중 입니다.', 10)
-    download_file(dalle_img_url, 'temp/' + file_name + '.png')
-    png_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.png', file_name + '.png')
-
-    return png_file_url
-
-
 def load_view():
     padding_set()
     dalle_img_url = None
@@ -51,14 +36,14 @@ def load_view():
                 pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 10)
                 content = make_poem(user_input)
 
-                pbar.change_progress('이미지를 생성 중 입니다.', 10)
-
                 def run_gen_image():
                     nonlocal dalle_img_url, png_file_url
                     dalle_img_url = gen_image_thread(content, file_name, pbar, user_input)
 
                 thread_img = threading.Thread(target=run_gen_image)
                 thread_img.start()
+                # 쓰레드 뒤에 출력 해서 약간의 시간 벌기.
+                pbar.change_progress('이미지를 생성 중 입니다.', 40)
 
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
@@ -69,24 +54,30 @@ def load_view():
                 pbar.change_progress('오디오 파일을 저장 중 입니다.', 10)
                 wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
 
-                pbar.change_progress('이미지 생성 작업을 마무리 중 입니다.', 20)
+                pbar.change_progress('이미지 생성 작업을 마무리 중 입니다.', 10)
                 thread_img.join()
-                png_file_url = on_image_generated(dalle_img_url, file_name, pbar)
+
+                if not dalle_img_url:
+                    dalle_img_url = "https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/default_img.png"
+                    pbar.change_progress('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 10)
+                else:
+                    pbar.change_progress('이미지 생성이 완료되었습니다.', 10)
 
                 st.title(user_input)
                 st.image(dalle_img_url, use_column_width=True, caption=f'{content}')
                 st.audio(wav_file_url, format='audio/wav', autoplay=True)
 
+                # 현재 이미지 파일은 따로 저장 되지 않고, DB도 생성된 URL 만 저장.
                 pbar.change_progress('작업한 내용을 데이타베이스에 저장 중 입니다.', 10)
-                insert_data(png_file_url, wav_file_url, user_input, content)
+                insert_data(dalle_img_url, wav_file_url, user_input, content)
 
                 pbar.empty()
 
+                st.balloons()
+                scroll_here()
+
+                # 페이지를 일찍 벗어나면 임시파일이 남을 수 있으나 관리자에서 삭제 가능
                 try:
-                    os.remove('temp/' + file_name + '.png')
                     os.remove('temp/' + file_name + '.wav')
                 except Exception as e:
                     print(e)
-
-                st.balloons()
-                scroll_here()
