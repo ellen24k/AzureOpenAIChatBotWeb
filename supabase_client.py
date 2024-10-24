@@ -23,7 +23,6 @@ if not FUNCTIONS_BEARER_TOKEN:
 #         file.write(f"실행시간 : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - 실패\n")
 
 if FUNCTIONS_BEARER_TOKEN:
-    with open('result.txt', 'a') as file:
-        file.write(f"FUNCTIONS_BEARER_TOKEN 값이 존재합니다: {FUNCTIONS_BEARER_TOKEN}\n")
+        print(f"FUNCTIONS_BEARER_TOKEN 값이 존재합니다: \n")
 
 
