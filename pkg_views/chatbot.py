@@ -51,7 +51,6 @@ def load_view():
                 pbar.change_progress('인공지능이 단어를 가지고 삼행시를 생성 중 입니다. 잠시만 기다려주세요.', 10)
                 content = make_poem(user_input)
 
-                pbar.change_progress('이미지를 생성 중 입니다.', 10)
 
                 def run_gen_image():
                     nonlocal dalle_img_url, png_file_url
@@ -59,6 +58,8 @@ def load_view():
 
                 thread_img = threading.Thread(target=run_gen_image)
                 thread_img.start()
+                # 쓰레드 뒤로 옮겨서 이미지 생성이 먼저 되도록 함.
+                pbar.change_progress('이미지를 생성 중 입니다.', 30)
 
                 autoplay_audio(
                     'https://raw.githubusercontent.com/ellen24k/AzureOpenAIChatBotWeb/main/resources/snd_bg.wav')
@@ -69,7 +70,7 @@ def load_view():
                 pbar.change_progress('오디오 파일을 저장 중 입니다.', 10)
                 wav_file_url = file_upload("ChatBotFiles", 'temp/' + file_name + '.wav', file_name + '.wav')
 
-                pbar.change_progress('이미지 생성 작업을 마무리 중 입니다.', 20)
+                pbar.change_progress('이미지 생성 작업을 마무리 중 입니다.', 10)
                 thread_img.join()
                 png_file_url = on_image_generated(dalle_img_url, file_name, pbar)
 
