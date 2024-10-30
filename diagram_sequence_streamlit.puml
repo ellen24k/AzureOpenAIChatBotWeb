@@ -1,0 +1,36 @@
+@startuml
+title [3행시] Sequence Diagram
+
+actor User
+participant Streamlit
+box "Azure Cloud" #LightBlue
+participant ChatUtils as "ChatGPT4"
+participant DalleUtils as "Dall-e 3"
+participant TTSUtils as "Speech"
+end box
+box "SUPABASE" #LightBlue
+participant Supabase as "Storage"
+participant DBUtils as "PostreSQL"
+end box
+
+User -> Streamlit: 삼행시 만들기 요청
+Streamlit -> Streamlit: 시작 안내 음성 출력
+Streamlit -> ChatUtils: 3행시 생성 요청
+Streamlit <-- ChatUtils: 3행시 생성 결과
+Streamlit -> DalleUtils: 이미지 생성 요청
+activate DalleUtils
+Streamlit -> Streamlit: 대기음 재생
+Streamlit -> TTSUtils: 3행시 음성 합성 요청
+TTSUtils --> Streamlit: 음성 파일
+Streamlit -> Supabase: 음성 파일 저장
+Streamlit -> Streamlit: 이미지 생성 대기
+activate Streamlit
+Streamlit <-- DalleUtils: 이미지 파일
+deactivate DalleUtils
+deactivate Streamlit
+Streamlit -> Streamlit: 이미지 생성 실패 시 기본 이미지로 설정
+'Streamlit -> Supabase: save_image_to_supabase(dalle_img_url, file_name, pbar)
+Streamlit -> Streamlit: 3행시 제목, 이미지 출력 및 음성 재생
+Streamlit -> DBUtils: 데이터 DB에 저장
+Streamlit -> Streamlit: 임시파일 삭제
+@enduml

@@ -1,0 +1,19 @@
+{
+  "name": "chatbot_dalle_image_batch_processor",
+  "version": "1.0.0",
+  "description": "A project to process DALL-E images in batch using Supabase Edge Functions.",
+  "main": "index.js",
+  "scripts": {
+    "deploy:chatbot": "npx supabase functions deploy chatbot_dalle_image_batch_processor",
+    "deploy:download": "npx supabase functions deploy download_file",
+    "deploy:all": "npm run deploy:chatbot && npm run deploy:download"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^1.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  },
+  "author": "ellen24k",
+  "license": "MIT"
+}

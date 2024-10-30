@@ -1,0 +1,45 @@
+@startuml
+title Deployment Diagram
+
+actor User
+actor Developer
+
+node "User's Device (Browser)" {
+    [Streamlit App]
+}
+
+node "Azure Services" {
+    frame OPENAI{
+        [Dalle3]
+        [ChatGPT]
+    }
+    [Cognitiveservices-Speech]
+    [Azure Blob Storage]
+}
+
+node "GitHub" {
+    [GitHub Repository]
+    [GitHub Actions]
+}
+
+node "Supabase" {
+    [Supabase Storage]
+    [Supabase Edge Function]
+    [Supabase PostreSQL]
+}
+Developer --> [GitHub Repository] : CodeBase
+User --> [Streamlit App]
+[GitHub Actions] -> [GitHub Repository] : CodeBase
+[GitHub Actions] --> [Supabase Edge Function] : Auto Deploy
+[Streamlit App] --> [GitHub Repository] : CodeBase
+[Streamlit App] --> [Supabase Storage] : Wav Upload
+[Streamlit App] ---> [Supabase PostreSQL] : Database
+[Streamlit App] -> [ChatGPT] : Chatbot
+[Streamlit App] -> [Dalle3] : Image Generation
+[Streamlit App] ----> [Cognitiveservices-Speech] : Text-to-Speech Wav
+[Supabase Edge Function] -> [Supabase Storage] : Image Upload
+[Supabase Edge Function] <-- [Supabase PostreSQL] : Invoke by Trigger
+[Supabase Edge Function] --> [Supabase PostreSQL] : Image URL Update
+[Supabase Edge Function] -> [Azure Blob Storage] : Image Download
+[Dalle3] ---> [Azure Blob Storage] : Image Storage
+@enduml

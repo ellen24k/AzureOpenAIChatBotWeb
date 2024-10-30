@@ -1,0 +1,11 @@
+azure-core~=1.18.0
+streamlit_authenticator~=0.1.5
+openai
+streamlit_navigation_bar
+streamlit_option_menu
+langchain_openai
+supabase
+pyshorteners
+azure-cognitiveservices-speech
+requests
+python-dotenv

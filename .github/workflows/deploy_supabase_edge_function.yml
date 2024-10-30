@@ -1,0 +1,45 @@
+name: Deploy Supabase Edge Function
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      PROJECT_ID: uzefbkvgsuzmopxjxymz
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v45
+
+#      - name: List all added files
+#        env:
+#          ADDED_FILES: ${{ steps.changed-files.outputs.added_files }}
+#          MODIFIED_FILES: ${{ steps.changed-files.outputs.modified_files }}
+#        run: |
+#          for file in ${MODIFIED_FILES}; do
+#            echo "$file was modified"
+#          done
+          
+      - name: Deploy Image Batch Function
+        if: contains(steps.changed-files.outputs.modified_files, 'supabase/functions/chatbot_dalle_image_batch_processor/index.ts')
+        run: |
+          supabase functions deploy chatbot_dalle_image_batch_processor --project-ref ${{ env.PROJECT_ID }} --no-verify-jwt
+        
+      - name: Deploy Download File Function
+        if: contains(steps.changed-files.outputs.modified_files, 'supabase/functions/download_file/index.ts')
+        run: |
+          supabase functions deploy download_file --project-ref ${{ env.PROJECT_ID }} --no-verify-jwt

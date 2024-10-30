@@ -1,0 +1,49 @@
+## git bash terminal
+## .git/hooks/pre-commit 파일 생성
+--
+#!/bin/bash
+
+# version.txt 파일에서 현재 버전 값을 읽음
+version=$(cat version.txt)
+
+# 버전 값을 '.'으로 분리하여 배열로 저장
+IFS='.' read -r -a version_parts <<< "$version"
+
+# 마지막 자리 값을 1 증가시킴
+last_index=$((${#version_parts[@]} - 1))
+version_parts[$last_index]=$((${version_parts[$last_index]} + 1))
+
+# 증가된 버전 값을 다시 문자열로 결합
+new_version=$(IFS='.'; echo "${version_parts[*]}")
+
+# 새로운 버전 값을 version.txt 파일에 저장하고 추가
+echo "$new_version" > version.txt
+git add version.txt
+# 참고로 version.txt 파일은 gitignore에 추가되어 있어서 fetch 되지 않음
+--
+## git bash terminal
+chmod +x pre-commit
+--
+deno, deno plugin 설치
+iwr https://deno.land/x/install/install.ps1 -useb | iex
+docker 설치
+--
+npm install supabase --save-dev
+npx supabase init # intellij settings에서 y
+npx supabase functions new download_file
+run_supabase (내용 set SUPABASE_ACCESS_TOKEN=...)
+npx supabase functions deploy download_file
+npx supabase functions deploy chatbot_dalle_image_batch_processor
+#invoke
+curl -L -X POST 'https://uzefbkvgsuzmopxjxymz.supabase.co/functions/v1/hello-world' -H 'Authorization: Bearer xxx' --data '{"name":"Functions"}'
+
+--
+
+클리어 히스토리
+.gitignore 파일에 .idea/ 추가할 것
+
+git rm -r --cached .
+git add .
+
+sh commit-history-cleaner.sh
+

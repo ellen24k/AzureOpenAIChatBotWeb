@@ -1,0 +1,23 @@
+@startuml
+
+title [DATABASE] Sequence Diagram
+ACTOR Stremalit
+box "SUPABASE" #LightBlue
+PARTICIPANT PostreSQL
+PARTICIPANT Storage
+PARTICIPANT EdgeFunction
+end box
+PARTICIPANT DalleAzureBlobStorage
+
+Stremalit -> PostreSQL: INSERT DATA
+PostreSQL  -> EdgeFunction: 이미지 처리 함수 실행 (by 트리거)
+activate EdgeFunction
+PostreSQL  <- EdgeFunction: Dall-e 이미지 URL 질의
+PostreSQL  --> EdgeFunction: Dall-e 이미지 URL 전송
+EdgeFunction -> DalleAzureBlobStorage: 이미지 다운로드 요청
+DalleAzureBlobStorage --> EdgeFunction: 이미지 다운로드
+EdgeFunction -> Storage: 이미지 업로드
+EdgeFunction -> PostreSQL: Storage 이미지 URL 로 변경
+deactivate EdgeFunction
+
+@enduml
