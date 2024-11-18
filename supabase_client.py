@@ -42,12 +42,3 @@ def request_edge_function_chatbot_dalle_image_batch_processor():
 
 request_edge_function_chatbot_dalle_image_batch_processor()
 
-# todo 호출은 내용을 바꿔. download_file 함수 호출은 안할거야. 환경변수 다 정리하고.
-# edge function을 만들어 이름은 chatbot_dalle_image_batch_processor
-# 함수는 호출되면
-# data table에서 moved == False 인 리스트 쿼리해서
-# img_url을 받아서 download_file 함수 호출 하고
-# public_url 을 리턴 받아
-# supabase에 img_url값으로 업데이트 하고
-# moved == True로 업데이트 해.
-# python supabase_client.py는 call만 하면 됨. 로그는 supabase에서 볼거야.
