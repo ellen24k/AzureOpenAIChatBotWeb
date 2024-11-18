@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts"
 import { createClient } from "https://cdn.skypack.dev/@supabase/supabase-js"
+import sharp from 'sharp';
 
 const LOG_PREFIX = "[CHATBOT][IMAGE_BATCH_PROCESSOR]";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
@@ -41,9 +42,14 @@ async function downloadAndUploadFile(img_url: string, bucket_name: string, file_
         throw new Error(`Failed to download file: ${response.statusText}`);
     }
     const fileContent = await response.arrayBuffer();
+
+    const resizedImageBuffer = await sharp(new Uint8Array(fileContent))
+        .resize(720, 720) // 원하는 크기로 조정
+        .toBuffer();
+
     const { data, error } = await supabase.storage
         .from(bucket_name)
-        .upload(file_name, new Blob([fileContent]));
+        .upload(file_name, new Blob([resizedImageBuffer]));
     if (error) {
         throw new Error(`Failed to upload file to Supabase Storage: ${error.message}`);
     }
