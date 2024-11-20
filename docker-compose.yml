@@ -1,0 +1,23 @@
+services:
+  app:
+    image: streamlit_ai_poet
+    container_name: AzureOpenAIChatBotWeb
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./secrets.toml:/app/.streamlit/secrets.toml
+      
+    networks:
+      net:
+#          ipv4_address: 172.22.22.10
+
+networks:
+  net:
+    external: true
+    
+#    networks:
+#      - default-network
+#networks:
+#  default-network:
+#    driver: bridge
+
