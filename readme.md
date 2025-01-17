@@ -11,7 +11,7 @@ and GitHub Action Deploy, SQL & PLpgSQL routines(stored procedure) with pg_net e
 
 1. **SQL**: 데이터베이스 쿼리 언어로 데이터베이스 관리.
 2. **Python**: 주 프로그래밍 언어로, 다양한 라이브러리와 프레임워크를 사용하여 애플리케이션 로직 구현.
-3. **TypeScript**: JavaScript의 상위 집합 언어로, 더 강력한 타입 시스템을 제공하여 클라이언트 측 로직 구현.
+3. **TypeScript**: 더 강력한 타입 시스템을 제공하여 클라이언트 측 로직 구현.
 4. **JavaScript**: 웹 애플리케이션의 클라이언트 측 스크립팅 언어.
 5. **npm**: Node.js 패키지 매니저로, JavaScript 라이브러리와 도구를 관리.
 6. **pip**: Python 패키지 매니저로, Python 라이브러리와 도구를 관리.
